@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="mazegame"
+run/main_scene="uid://biiskriaojkqp"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[file_customization]
+
+folder_colors={
+"res://scripts/": "gray"
+}
 
 [input]
 

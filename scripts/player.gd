@@ -18,6 +18,9 @@ var sprinting = false
 
 @onready var head = $head
 
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 func _physics_process(delta: float) -> void:
 	
 	## sprinting

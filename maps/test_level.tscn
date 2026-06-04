@@ -30,6 +30,9 @@ data = PackedVector3Array(9.0812, 0.099999994, -8.918799, 9.918799, 0.099999994,
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1967765408]
 environment = SubResource("Environment_kwset")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=2023836822]
+transform = Transform3D(1, 0, 0, 0, 0.63566065, 0.7719686, 0, -0.7719686, 0.63566065, 0, 0, 0)
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=582697523]
 navigation_mesh = SubResource("NavigationMesh_hcm4o")
 
