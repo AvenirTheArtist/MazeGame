@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://2ywcafmf5l5v"]
+
+[ext_resource type="Script" uid="uid://rjghv5dak213" path="res://scripts/gui.gd" id="1_s4ehn"]
+
+[node name="gui" type="Control" unique_id=844792369]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_s4ehn")
+
+[node name="topleft" type="Control" parent="." unique_id=1532966660]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="hp" type="ProgressBar" parent="topleft" unique_id=1344728334]
+modulate = Color(1, 0.23921569, 0.23921569, 1)
+layout_mode = 0
+offset_right = 450.0
+offset_bottom = 30.0
+
+[node name="stamina" type="ProgressBar" parent="topleft" unique_id=1126781877]
+modulate = Color(0.23921569, 1, 0.23921569, 1)
+layout_mode = 0
+offset_top = 34.0
+offset_right = 450.0
+offset_bottom = 64.0
+
+[node name="topright" type="Control" parent="." unique_id=56690247]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="bells_collected" type="Label" parent="topright" unique_id=533205816]
+layout_mode = 0
+offset_left = -267.0
+offset_top = 24.0
+offset_right = 9.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 32
+text = "0/0 bells collected"
