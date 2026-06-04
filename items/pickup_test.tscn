@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://du0mm5yaf63jx"]
+
+[ext_resource type="Script" uid="uid://dq72686q4tfv5" path="res://items/pickup_test.gd" id="1_j243r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_flyol"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flyol"]
+albedo_color = Color(1, 0.654902, 0.3764706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g68nn"]
+material = SubResource("StandardMaterial3D_flyol")
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="pickup_test" type="Area3D" unique_id=1839151362]
+script = ExtResource("1_j243r")
+metadata/_custom_type_script = "uid://dqhnhiyac1pg2"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=54745964]
+shape = SubResource("BoxShape3D_flyol")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2047121966]
+mesh = SubResource("BoxMesh_g68nn")

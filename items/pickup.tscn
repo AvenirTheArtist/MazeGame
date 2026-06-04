@@ -2,5 +2,15 @@
 
 [ext_resource type="Script" uid="uid://dqhnhiyac1pg2" path="res://scripts/pickup.gd" id="1_1sycn"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1sycn"]
+resource_local_to_scene = true
+
 [node name="Pickup" type="Area3D" unique_id=259076975]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_1sycn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=399693202]
+shape = SubResource("BoxShape3D_1sycn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
