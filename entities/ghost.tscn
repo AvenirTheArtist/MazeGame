@@ -14,6 +14,7 @@ radius = 0.3
 
 [node name="ghost" type="CharacterBody3D" unique_id=1867606666]
 script = ExtResource("1_4a7c8")
+speed = 5.3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1286315396]
 shape = SubResource("CapsuleShape3D_rbinr")
