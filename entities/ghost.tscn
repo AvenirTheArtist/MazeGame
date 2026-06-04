@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dtckck82aj13t"]
+
+[ext_resource type="Script" uid="uid://b2okvfvocwsce" path="res://scripts/ghost.gd" id="1_4a7c8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rbinr"]
+radius = 0.3
+
+[node name="ghost" type="CharacterBody3D" unique_id=1867606666]
+script = ExtResource("1_4a7c8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1286315396]
+shape = SubResource("CapsuleShape3D_rbinr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=319643354]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1292457759]
