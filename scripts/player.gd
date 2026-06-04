@@ -76,4 +76,5 @@ func take_damage(damage_taken: float) -> void:
 		die()
 
 func die() -> void:
+	## need a proper death code 
 	pass
