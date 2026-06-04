@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 				next_dest = player.global_position
 			states.STUNNED:
 				next_dest = self.global_position
-		print(next_dest)
+		#print(next_dest)
 		#endregion
 		
 		nav.target_position = next_dest
@@ -57,5 +57,16 @@ func _physics_process(delta: float) -> void:
 
 
 func move_to_bell(pos) -> void:
-	alerted_pos = pos
-	state = states.ALERTED
+	if state != states.CHASING:
+		alerted_pos = pos
+		state = states.ALERTED
+
+
+func _on_player_proximity_detection_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		state = states.CHASING
+
+
+func _on_player_proximity_detection_body_exited(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		state = states.ROAMING

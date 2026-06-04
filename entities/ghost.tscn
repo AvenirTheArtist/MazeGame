@@ -32,3 +32,6 @@ mesh = SubResource("CapsuleMesh_rbinr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player_proximity_detection" unique_id=1796393985]
 shape = SubResource("CylinderShape3D_4a7c8")
+
+[connection signal="body_entered" from="player_proximity_detection" to="." method="_on_player_proximity_detection_body_entered"]
+[connection signal="body_exited" from="player_proximity_detection" to="." method="_on_player_proximity_detection_body_exited"]
