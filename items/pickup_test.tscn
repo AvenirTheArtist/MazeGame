@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://du0mm5yaf63jx"]
+
+[ext_resource type="PackedScene" uid="uid://dw5g1fa003au8" path="res://items/pickup.tscn" id="1_flyol"]
+[ext_resource type="Script" uid="uid://dq72686q4tfv5" path="res://scripts/pickup_test.gd" id="1_j243r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_flyol"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flyol"]
+albedo_color = Color(1, 0.654902, 0.3764706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_indub"]
+material = SubResource("StandardMaterial3D_flyol")
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="Pickup" unique_id=259076975 instance=ExtResource("1_flyol")]
+script = ExtResource("1_j243r")
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=399693202]
+shape = SubResource("BoxShape3D_flyol")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1" unique_id=1535573897]
+mesh = SubResource("BoxMesh_indub")
