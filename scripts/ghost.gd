@@ -11,11 +11,14 @@ enum states {
 @export var patrol_pos: Array[Vector3]
 var alerted_pos: Vector3
 
-var state = states.CHASING
+var state = states.ROAMING
 var update_timer = 0.0
 
 @onready var nav = $NavigationAgent3D
 @onready var player = get_tree().get_first_node_in_group("player")
+
+func _ready() -> void:
+	get_parent().bell_collected.connect(move_to_bell)
 
 func _physics_process(delta: float) -> void:
 	
@@ -33,7 +36,7 @@ func _physics_process(delta: float) -> void:
 			states.ROAMING:
 				pass
 			states.ALERTED:
-				pass
+				next_dest = alerted_pos
 			states.CHASING:
 				next_dest = player.global_position
 			states.STUNNED:
@@ -51,3 +54,8 @@ func _physics_process(delta: float) -> void:
 	velocity = vel
 	
 	move_and_slide()
+
+
+func move_to_bell(pos) -> void:
+	alerted_pos = pos
+	state = states.ALERTED
