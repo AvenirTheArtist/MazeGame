@@ -20,6 +20,8 @@ var update_timer = 0.0
 
 func _ready() -> void:
 	get_parent().bell_collected.connect(move_to_bell)
+	for i in get_tree().get_nodes_in_group("patrol_marker"):
+		patrol_pos.append(i.global_position)
 	next_dest = update_roaming()
 
 func _physics_process(delta: float) -> void:
@@ -73,6 +75,7 @@ func _on_player_proximity_detection_body_entered(body: Node3D) -> void:
 
 func _on_player_proximity_detection_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
+		next_dest = update_roaming()
 		state = states.ROAMING
 
 ## when the enemy in roaming or alerted state reaches something, it picks another point to roam towards 

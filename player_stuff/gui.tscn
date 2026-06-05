@@ -17,6 +17,7 @@ layout_mode = 1
 anchors_preset = 0
 
 [node name="hp" type="ProgressBar" parent="topleft" unique_id=1344728334]
+visible = false
 modulate = Color(1, 0.23921569, 0.23921569, 1)
 layout_mode = 0
 offset_right = 450.0
@@ -25,9 +26,10 @@ offset_bottom = 30.0
 [node name="stamina" type="ProgressBar" parent="topleft" unique_id=1126781877]
 modulate = Color(0.23921569, 1, 0.23921569, 1)
 layout_mode = 0
-offset_top = 34.0
-offset_right = 450.0
-offset_bottom = 64.0
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 462.0
+offset_bottom = 46.0
 
 [node name="topright" type="Control" parent="." unique_id=56690247]
 layout_mode = 1
