@@ -4,6 +4,43 @@
 [ext_resource type="Texture2D" uid="uid://cljoj8tkr5g8q" path="res://images/matchstick.png" id="2_l5pwb"]
 [ext_resource type="Texture2D" uid="uid://cn147efb2m4d3" path="res://images/firesprite.png" id="3_a72ct"]
 [ext_resource type="Script" uid="uid://dud7j7dedy5td" path="res://scripts/matchstickgui.gd" id="3_fldqh"]
+[ext_resource type="Texture2D" uid="uid://dslrupb447ixa" path="res://images/burntmatchstick.png" id="4_6uk0c"]
+
+[sub_resource type="Animation" id="Animation_y0ual"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("matchstickgui:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, -300)]
+}
+
+[sub_resource type="Animation" id="Animation_6uk0c"]
+resource_name = "matchcomingup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("matchstickgui:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.17075552, 1),
+"update": 0,
+"values": [Vector2(4, 100), Vector2(4, -300)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0ual"]
+_data = {
+&"RESET": SubResource("Animation_y0ual"),
+&"matchcomingup": SubResource("Animation_6uk0c")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a72ct"]
 atlas = ExtResource("3_a72ct")
@@ -70,6 +107,7 @@ script = ExtResource("1_s4ehn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1664297915]
 root_node = NodePath("../bottomleft")
+libraries/ = SubResource("AnimationLibrary_y0ual")
 
 [node name="topleft" type="Control" parent="." unique_id=1532966660]
 layout_mode = 1
@@ -120,22 +158,37 @@ grow_vertical = 0
 [node name="matchstickgui" type="TextureRect" parent="bottomleft" unique_id=939095249]
 layout_mode = 0
 offset_left = 4.0
-offset_top = -301.0
+offset_top = -300.0
 offset_right = 1028.0
-offset_bottom = 723.0
+offset_bottom = 724.0
 scale = Vector2(0.4273974, 0.4273974)
-texture = ExtResource("2_l5pwb")
+texture = ExtResource("4_6uk0c")
 script = ExtResource("3_fldqh")
+matchstick_textures = Array[Texture2D]([ExtResource("2_l5pwb"), ExtResource("4_6uk0c")])
+
+[node name="litpos" type="Control" parent="bottomleft/matchstickgui" unique_id=228410676]
+anchors_preset = 0
+offset_left = 662.1472
+offset_top = 255.03198
+offset_right = 702.1472
+offset_bottom = 295.03198
+
+[node name="halfwaylitpos" type="Control" parent="bottomleft/matchstickgui" unique_id=1714018682]
+anchors_preset = 0
+offset_left = 561.53827
+offset_top = 521.7627
+offset_right = 601.53827
+offset_bottom = 561.7627
 
 [node name="fireanim" type="AnimatedSprite2D" parent="bottomleft/matchstickgui" unique_id=72215489]
 z_index = -1
-position = Vector2(676.18567, 86.57051)
 scale = Vector2(0.8139821, 0.8139821)
 sprite_frames = SubResource("SpriteFrames_6uk0c")
-animation = &"empty"
+animation = &"animatedfire"
+offset = Vector2(0, -200)
 
 [node name="burnouttimer" type="Timer" parent="bottomleft/matchstickgui" unique_id=1314475471]
-wait_time = 2.0
+wait_time = 5.0
 one_shot = true
 
 [connection signal="animation_finished" from="bottomleft/matchstickgui/fireanim" to="bottomleft/matchstickgui" method="_on_fireanim_animation_finished"]

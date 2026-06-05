@@ -1,46 +1,65 @@
 extends TextureRect
 
 @onready var fireanim: AnimatedSprite2D = $fireanim
+@onready var animplayer: AnimationPlayer = $"../../AnimationPlayer"
 @onready var burnouttimer: Timer = $burnouttimer
 
+@export var matchstick_textures: Array[Texture2D] = [null, null]
 @export var matchstick_health: float = 2
 
 var burning: bool = false
 enum stages {UNLIT, LIT, HALFWAY_LIT, NONE}
 var current_stage: stages = stages.UNLIT
 
-func _ready() -> void:
-	start_burning()
+@onready var litpos: Control = $litpos
+@onready var halfwaylitpos: Control = $halfwaylitpos
 
+
+func _ready() -> void:
+	animplayer.play("matchcomingup")
+	
 func start_burning():
-	burnouttimer.start()
+	if Global.player.matchstick_amount <= 0:
+		return
+	burnouttimer.start(matchstick_health)
 	current_stage = stages.LIT
 	burning = true
+	
 	fireanim.play("enterfire")
 	await fireanim.animation_finished
 	fireanim.play("animatedfire")
 
 func burnout():
-	current_stage = stages.UNLIT
+	burning = false
+	current_stage = stages.NONE
 	fireanim.play("empty")
-	print("action")
+	Global.player.matchstick_amount -= 1
+	if Global.player.matchstick_amount >= 1:
+		current_stage = stages.UNLIT
+		animplayer.play("matchcomingup")
+	else: current_stage = stages.NONE
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		start_burning()
 		
+	if burnouttimer.time_left <= matchstick_health/2 and burnouttimer.time_left != 0:
+		current_stage = stages.HALFWAY_LIT
 		
 	match current_stage:
 		stages.LIT:
-			pass
+			fireanim.global_position = litpos.global_position
+			texture = matchstick_textures[0]
 		stages.HALFWAY_LIT:
-			pass
+			fireanim.global_position = halfwaylitpos.global_position
+			texture = matchstick_textures[1]
 		stages.UNLIT:
-			pass
+			texture = matchstick_textures[0]
+			fireanim.play("empty")
 		stages.NONE:
-			pass
+			fireanim.play("empty")
+			texture = null
 
 
 func _on_burnouttimer_timeout() -> void:
 	burnout()
-	print("burnout")
