@@ -16,6 +16,10 @@ var stamina = max_stamina
 
 var sprinting = false
 
+var lantern_empowered = false
+var lantern_time: float
+
+
 @onready var head = $head
 
 func _ready() -> void:
@@ -23,21 +27,11 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	## sprinting
-	if Input.is_action_just_pressed("sprint"):
-		sprinting = true
-	if Input.is_action_just_released("sprint"):
-		sprinting = false
-	
-	if sprinting:
-		stamina -= stamina_drain * delta
-		if stamina <= 0:
-			sprinting = false
-	else:
-		if stamina < max_stamina:
-			stamina += stamina_recovery * delta
-	
 	## /// beginning of movement
+	
+	var input_dir = Input.get_vector("left", "right", "forward", "backward")
+	var direction = input_dir.normalized().rotated(-head.rotation.y)
+	var direction_final = Vector3(direction.x, 0, direction.y)
 	
 	var speed: float
 	if sprinting:
@@ -45,13 +39,25 @@ func _physics_process(delta: float) -> void:
 	else:
 		speed = walk_speed
 	
-	var input_dir = Input.get_vector("left", "right", "forward", "backward")
-	var direction = input_dir.normalized().rotated(-head.rotation.y)
-	var direction_final = Vector3(direction.x, 0, direction.y)
+		## sprinting
+	if Input.is_action_just_pressed("sprint"):
+		sprinting = true
+	if Input.is_action_just_released("sprint"):
+		sprinting = false
+	
+	if sprinting and direction_final.length() > 0.1:
+		stamina -= stamina_drain * delta
+		if stamina <= 0:
+			sprinting = false
+	else:
+		if stamina < max_stamina:
+			stamina += stamina_recovery * delta
 	
 	velocity.x = lerp(velocity.x, speed * direction_final.x, acceleration * delta)
 	velocity.z = lerp(velocity.z, speed * direction_final.z, acceleration * delta)
 	## /// end of movement
+	
+	
 	
 	move_and_slide()
 
@@ -61,6 +67,10 @@ func _input(event) -> void:
 		head.rotation_degrees.y -= event.relative.x * sensitivity
 		head.rotation_degrees.x -= event.relative.y * sensitivity
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+
+
+func change_lantern(value: float) -> void:
+	pass
 
 
 func take_damage(damage_taken: float) -> void:
