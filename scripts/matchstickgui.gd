@@ -1,44 +1,25 @@
 extends TextureRect
 
-@onready var fireanim: AnimatedSprite2D = $fireanim
-@onready var animplayer: AnimationPlayer = $"../../AnimationPlayer"
-@onready var burnouttimer: Timer = $burnouttimer
+enum stages {UNLIT, LIT, HALFWAY_LIT, NONE}
 
 @export var matchstick_textures: Array[Texture2D] = [null, null]
 @export var matchstick_health: float = 2
 
-var burning: bool = false
-enum stages {UNLIT, LIT, HALFWAY_LIT, NONE}
-var current_stage: stages = stages.UNLIT
+@onready var fireanim: AnimatedSprite2D = $fireanim
+@onready var animplayer: AnimationPlayer = $"../../AnimationPlayer"
+@onready var burnouttimer: Timer = $burnouttimer
 
 @onready var litpos: Control = $litpos
 @onready var halfwaylitpos: Control = $halfwaylitpos
+
+var burning: bool = false
+var current_stage: stages = stages.UNLIT
+
 
 
 func _ready() -> void:
 	animplayer.play("matchcomingup")
 	
-func start_burning():
-	if Global.player.matchstick_amount <= 0:
-		return
-	burnouttimer.start(matchstick_health)
-	current_stage = stages.LIT
-	burning = true
-	
-	fireanim.play("enterfire")
-	await fireanim.animation_finished
-	fireanim.play("animatedfire")
-
-func burnout():
-	burning = false
-	current_stage = stages.NONE
-	fireanim.play("empty")
-	Global.player.matchstick_amount -= 1
-	if Global.player.matchstick_amount >= 1:
-		current_stage = stages.UNLIT
-		animplayer.play("matchcomingup")
-	else: current_stage = stages.NONE
-
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		start_burning()
@@ -59,7 +40,27 @@ func _process(delta: float) -> void:
 		stages.NONE:
 			fireanim.play("empty")
 			texture = null
+			
+func start_burning():
+	if Global.player.matchstick_amount <= 0:
+		return
+	burnouttimer.start(matchstick_health)
+	current_stage = stages.LIT
+	burning = true
+	
+	fireanim.play("enterfire")
+	await fireanim.animation_finished
+	fireanim.play("animatedfire")
 
+func burnout():
+	burning = false
+	current_stage = stages.NONE
+	fireanim.play("empty")
+	Global.player.matchstick_amount -= 1
+	if Global.player.matchstick_amount >= 1:
+		current_stage = stages.UNLIT
+		animplayer.play("matchcomingup")
+	else: current_stage = stages.NONE
 
 func _on_burnouttimer_timeout() -> void:
 	burnout()
