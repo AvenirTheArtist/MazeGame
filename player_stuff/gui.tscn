@@ -1,6 +1,50 @@
 [gd_scene format=3 uid="uid://2ywcafmf5l5v"]
 
 [ext_resource type="Script" uid="uid://rjghv5dak213" path="res://scripts/gui.gd" id="1_s4ehn"]
+[ext_resource type="Texture2D" uid="uid://cljoj8tkr5g8q" path="res://images/matchstick.png" id="2_l5pwb"]
+[ext_resource type="Texture2D" uid="uid://cn147efb2m4d3" path="res://images/firesprite.png" id="3_a72ct"]
+[ext_resource type="Script" uid="uid://dud7j7dedy5td" path="res://scripts/matchstickgui.gd" id="3_fldqh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a72ct"]
+atlas = ExtResource("3_a72ct")
+region = Rect2(0, 1024, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6uk0c"]
+atlas = ExtResource("3_a72ct")
+region = Rect2(1024, 1024, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0ual"]
+atlas = ExtResource("3_a72ct")
+region = Rect2(1024, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fldqh"]
+atlas = ExtResource("3_a72ct")
+region = Rect2(0, 0, 1024, 1024)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6uk0c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a72ct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6uk0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0ual")
+}],
+"loop": true,
+"name": &"animatedfire",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fldqh")
+}],
+"loop": true,
+"name": &"enterfire",
+"speed": 4.0
+}]
 
 [node name="gui" type="Control" unique_id=844792369]
 layout_mode = 3
@@ -11,6 +55,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_s4ehn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1664297915]
+root_node = NodePath("../bottomleft")
 
 [node name="topleft" type="Control" parent="." unique_id=1532966660]
 layout_mode = 1
@@ -48,3 +95,32 @@ offset_right = 9.0
 offset_bottom = 69.0
 theme_override_font_sizes/font_size = 32
 text = "0/0 bells collected"
+
+[node name="bottomleft" type="Control" parent="." unique_id=418576829]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="matchstickgui" type="TextureRect" parent="bottomleft" unique_id=939095249]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -301.0
+offset_right = 1028.0
+offset_bottom = 723.0
+scale = Vector2(0.4273974, 0.4273974)
+texture = ExtResource("2_l5pwb")
+script = ExtResource("3_fldqh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bottomleft/matchstickgui" unique_id=72215489]
+z_index = -1
+position = Vector2(676.18567, 86.57051)
+scale = Vector2(0.8139821, 0.8139821)
+sprite_frames = SubResource("SpriteFrames_6uk0c")
+animation = &"enterfire"
+autoplay = "animatedfire"
+
+[node name="burnouttimer" type="Timer" parent="bottomleft/matchstickgui" unique_id=1314475471]
