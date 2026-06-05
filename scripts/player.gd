@@ -19,10 +19,12 @@ var sprinting = false
 var lantern_empowered = false
 var lantern_time: float
 
+var matchstick_amount: int = 2
 
 @onready var head = $head
 
 func _ready() -> void:
+	Global.player = self
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
