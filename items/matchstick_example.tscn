@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bfg7wpgtg2le3"]
+
+[ext_resource type="PackedScene" uid="uid://dw5g1fa003au8" path="res://items/pickup.tscn" id="1_x7nvl"]
+[ext_resource type="Script" uid="uid://ca8l3wublm5jj" path="res://scripts/matchstick.gd" id="2_lxy66"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x7nvl"]
+resource_local_to_scene = true
+
+[node name="matchstick" unique_id=259076975 instance=ExtResource("1_x7nvl")]
+script = ExtResource("2_lxy66")
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=399693202]
+shape = SubResource("BoxShape3D_x7nvl")
