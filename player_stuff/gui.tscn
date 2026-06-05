@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cn147efb2m4d3" path="res://images/firesprite.png" id="3_a72ct"]
 [ext_resource type="Script" uid="uid://dud7j7dedy5td" path="res://scripts/matchstickgui.gd" id="3_fldqh"]
 [ext_resource type="Texture2D" uid="uid://dslrupb447ixa" path="res://images/burntmatchstick.png" id="4_6uk0c"]
+[ext_resource type="Shader" uid="uid://c7w2wwk2il3nn" path="res://gui_pixelated.gdshader" id="6_y0ual"]
 
 [sub_resource type="Animation" id="Animation_y0ual"]
 length = 0.001
@@ -95,6 +96,19 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fffk0"]
+shader = ExtResource("6_y0ual")
+shader_parameter/resolution_x = 320
+shader_parameter/resolution_y = 240
+shader_parameter/color_bit_depth = 8
+shader_parameter/dither_strength = 0.01
+shader_parameter/jitter_amount = 0.001
+shader_parameter/jitter_speed = 1.2
+shader_parameter/jitter_frequency = 180.0
+shader_parameter/chromatic_aberration_strength = 0.0050000002375
+shader_parameter/vignette_strength = 0.8
+shader_parameter/vignette_radius = 0.9
+
 [node name="gui" type="Control" unique_id=844792369]
 layout_mode = 3
 anchors_preset = 15
@@ -127,6 +141,7 @@ offset_left = 12.0
 offset_top = 16.0
 offset_right = 462.0
 offset_bottom = 46.0
+show_percentage = false
 
 [node name="topright" type="Control" parent="." unique_id=56690247]
 layout_mode = 1
@@ -193,5 +208,13 @@ offset = Vector2(0, -200)
 wait_time = 5.0
 one_shot = true
 
-[connection signal="animation_finished" from="bottomleft/matchstickgui/fireanim" to="bottomleft/matchstickgui" method="_on_fireanim_animation_finished"]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=885447942]
+material = SubResource("ShaderMaterial_fffk0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="timeout" from="bottomleft/matchstickgui/burnouttimer" to="bottomleft/matchstickgui" method="_on_burnouttimer_timeout"]
