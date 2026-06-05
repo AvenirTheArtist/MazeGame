@@ -19,6 +19,7 @@ radius = 8.0
 [node name="ghost" type="CharacterBody3D" unique_id=1867606666]
 script = ExtResource("1_4a7c8")
 speed = 5.3
+patrol_pos = Array[Vector3]([Vector3(1, 1, 4), Vector3(-2, 1, 6), Vector3(-8, 1, 2), Vector3(0, 1, -4)])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1286315396]
 shape = SubResource("CapsuleShape3D_rbinr")
@@ -33,5 +34,6 @@ mesh = SubResource("CapsuleMesh_rbinr")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player_proximity_detection" unique_id=1796393985]
 shape = SubResource("CylinderShape3D_4a7c8")
 
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="body_entered" from="player_proximity_detection" to="." method="_on_player_proximity_detection_body_entered"]
 [connection signal="body_exited" from="player_proximity_detection" to="." method="_on_player_proximity_detection_body_exited"]

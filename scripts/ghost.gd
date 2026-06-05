@@ -10,6 +10,7 @@ enum states {
 @export var speed = 6.0
 @export var patrol_pos: Array[Vector3]
 var alerted_pos: Vector3
+var next_dest: Vector3
 
 var state = states.ROAMING
 var update_timer = 0.0
@@ -19,32 +20,25 @@ var update_timer = 0.0
 
 func _ready() -> void:
 	get_parent().bell_collected.connect(move_to_bell)
+	next_dest = update_roaming()
 
 func _physics_process(delta: float) -> void:
 	
-	## probably requires a state machine later, this works for testing for now	update_timer -= delta
-	
-	#region updating player position
-	update_timer -= delta
-	if update_timer <= 0:
-		var rand = randf_range(-0.1, 0.1)
-		randomize()
-		update_timer += 0.2 + rand
-		#print(next_dest)
-		var next_dest: Vector3
-		match state:
-			states.ROAMING:
-				pass
-			states.ALERTED:
-				next_dest = alerted_pos
-			states.CHASING:
-				next_dest = player.global_position
-			states.STUNNED:
-				next_dest = self.global_position
-		#print(next_dest)
-		#endregion
+	#region /// updating navigation 
+	match state:
+		states.CHASING:
+			update_timer -= delta
+			if update_timer <= 0:
+				var rand = randf_range(-0.1, 0.1)
+				randomize()
+				update_timer += 0.2 + rand
+			next_dest = player.global_position
 		
-		nav.target_position = next_dest
+		states.STUNNED:
+			next_dest = self.global_position
+	#endregion
+	
+	nav.target_position = next_dest
 	var next_pos = nav.get_next_path_position()
 	var direction: Vector3
 	direction.x = next_pos.x - global_position.x
@@ -56,12 +50,22 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func update_roaming() -> Vector3:
+	var possible_points: Array[Vector3]
+	for i in patrol_pos:
+		if (i - self.global_position).length() > 4:
+			possible_points.append(i)
+	
+	return possible_points.pick_random()
+
+## move to a collected bell
 func move_to_bell(pos) -> void:
 	if state != states.CHASING:
 		alerted_pos = pos
 		state = states.ALERTED
+		next_dest = alerted_pos
 
-
+## start chase when player_proximity_detection sees a player
 func _on_player_proximity_detection_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		state = states.CHASING
@@ -70,3 +74,13 @@ func _on_player_proximity_detection_body_entered(body: Node3D) -> void:
 func _on_player_proximity_detection_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		state = states.ROAMING
+
+## when the enemy in roaming or alerted state reaches something, it picks another point to roam towards 
+func _on_navigation_agent_3d_target_reached() -> void:
+	print("reached")
+	match state:
+		states.ROAMING:
+			next_dest = update_roaming()
+		states.ALERTED:
+			next_dest = update_roaming()
+			state = states.ROAMING
