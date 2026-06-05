@@ -17,6 +17,10 @@ region = Rect2(1024, 1024, 1024, 1024)
 atlas = ExtResource("3_a72ct")
 region = Rect2(1024, 0, 1024, 1024)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fffk0"]
+atlas = ExtResource("3_a72ct")
+region = Rect2(44, 44, 2, 2)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_fldqh"]
 atlas = ExtResource("3_a72ct")
 region = Rect2(0, 0, 1024, 1024)
@@ -39,9 +43,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fldqh")
+"texture": SubResource("AtlasTexture_fffk0")
 }],
 "loop": true,
+"name": &"empty",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fldqh")
+}],
+"loop": false,
 "name": &"enterfire",
 "speed": 4.0
 }]
@@ -115,12 +127,16 @@ scale = Vector2(0.4273974, 0.4273974)
 texture = ExtResource("2_l5pwb")
 script = ExtResource("3_fldqh")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bottomleft/matchstickgui" unique_id=72215489]
+[node name="fireanim" type="AnimatedSprite2D" parent="bottomleft/matchstickgui" unique_id=72215489]
 z_index = -1
 position = Vector2(676.18567, 86.57051)
 scale = Vector2(0.8139821, 0.8139821)
 sprite_frames = SubResource("SpriteFrames_6uk0c")
-animation = &"enterfire"
-autoplay = "animatedfire"
+animation = &"empty"
 
 [node name="burnouttimer" type="Timer" parent="bottomleft/matchstickgui" unique_id=1314475471]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="animation_finished" from="bottomleft/matchstickgui/fireanim" to="bottomleft/matchstickgui" method="_on_fireanim_animation_finished"]
+[connection signal="timeout" from="bottomleft/matchstickgui/burnouttimer" to="bottomleft/matchstickgui" method="_on_burnouttimer_timeout"]
