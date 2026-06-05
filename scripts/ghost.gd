@@ -77,7 +77,7 @@ func _on_player_proximity_detection_body_exited(body: Node3D) -> void:
 
 ## when the enemy in roaming or alerted state reaches something, it picks another point to roam towards 
 func _on_navigation_agent_3d_target_reached() -> void:
-	print("reached")
+	#print("reached")
 	match state:
 		states.ROAMING:
 			next_dest = update_roaming()

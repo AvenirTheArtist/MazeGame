@@ -16,6 +16,10 @@ var stamina = max_stamina
 
 var sprinting = false
 
+var lantern_empowered = false
+var lantern_time: float
+
+
 @onready var head = $head
 
 func _ready() -> void:
@@ -53,6 +57,8 @@ func _physics_process(delta: float) -> void:
 	velocity.z = lerp(velocity.z, speed * direction_final.z, acceleration * delta)
 	## /// end of movement
 	
+	
+	
 	move_and_slide()
 
 ## rotate camera
@@ -61,6 +67,10 @@ func _input(event) -> void:
 		head.rotation_degrees.y -= event.relative.x * sensitivity
 		head.rotation_degrees.x -= event.relative.y * sensitivity
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+
+
+func change_lantern(value: float) -> void:
+	pass
 
 
 func take_damage(damage_taken: float) -> void:
