@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b2okvfvocwsce" path="res://scripts/ghost.gd" id="1_4a7c8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rbinr"]
-radius = 0.1
+radius = 0.01
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4a7c8"]
 albedo_color = Color(1, 0, 0, 1)
@@ -28,6 +28,8 @@ shape = SubResource("CapsuleShape3D_rbinr")
 mesh = SubResource("CapsuleMesh_rbinr")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1292457759]
+path_desired_distance = 0.8
+target_desired_distance = 3.0
 
 [node name="player_proximity_detection" type="Area3D" parent="." unique_id=924214032]
 
