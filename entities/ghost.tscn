@@ -16,6 +16,9 @@ radius = 0.3
 resource_local_to_scene = true
 radius = 8.0
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4a7c8"]
+radius = 0.3
+
 [node name="ghost" type="CharacterBody3D" unique_id=1867606666]
 script = ExtResource("1_4a7c8")
 speed = 5.3
@@ -36,6 +39,16 @@ target_desired_distance = 3.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player_proximity_detection" unique_id=1796393985]
 shape = SubResource("CylinderShape3D_4a7c8")
 
+[node name="kill_area" type="Area3D" parent="." unique_id=1944046346]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="kill_area" unique_id=1052923480]
+shape = SubResource("CapsuleShape3D_4a7c8")
+debug_color = Color(0, 1, 0.9166665, 1)
+
+[node name="ghost_sprite" type="Sprite3D" parent="." unique_id=1061962938]
+billboard = 2
+
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="body_entered" from="player_proximity_detection" to="." method="_on_player_proximity_detection_body_entered"]
 [connection signal="body_exited" from="player_proximity_detection" to="." method="_on_player_proximity_detection_body_exited"]
+[connection signal="body_entered" from="kill_area" to="." method="_on_kill_area_body_entered"]

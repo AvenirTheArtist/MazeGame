@@ -15,6 +15,7 @@ var stamina = max_stamina
 @export var sensitivity = 0.1
 
 var sprinting = false
+var can_rotate = true
 
 var lantern_empowered = false
 var lantern_time: float
@@ -22,6 +23,7 @@ var lantern_time: float
 var matchstick_amount: int = 2
 
 @onready var head = $head
+@onready var light_lantern = $OmniLight3D
 
 func _ready() -> void:
 	Global.player = self
@@ -58,28 +60,29 @@ func _physics_process(delta: float) -> void:
 	velocity.x = lerp(velocity.x, speed * direction_final.x, acceleration * delta)
 	velocity.z = lerp(velocity.z, speed * direction_final.z, acceleration * delta)
 	## /// end of movement
-	
-	
-	
 	move_and_slide()
 
 ## rotate camera
 func _input(event) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and can_rotate:
 		head.rotation_degrees.y -= event.relative.x * sensitivity
 		head.rotation_degrees.x -= event.relative.y * sensitivity
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
+func change_lantern_brightness(value: float) -> void:
+	light_lantern.light_energy = value
 
-func change_lantern(value: float) -> void:
-	pass
-
-
-func take_damage(damage_taken: float) -> void:
-	hp -= damage_taken
-	if hp <= 0:
-		die()
-
-func die() -> void:
-	## need a proper death code 
-	pass
+## when the ghost touches you it sends its head position 
+## and your camera snaps to its head pos for a "jumpscare"
+func die(look_pos: Vector3) -> void:
+	#$death_sound.play() ## ATTENTION replace this with a sound 
+	head.position.y = 1.0
+	can_rotate = false
+	head.look_at(look_pos)
+	await get_tree().create_timer(
+		2.0,
+		false
+	).timeout
+	get_tree().change_scene_to_file("res://death_screen.tscn")
+	## show a death screen
+	

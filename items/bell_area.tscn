@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://0ibwvoq4ld7p"]
+
+[ext_resource type="PackedScene" uid="uid://dw5g1fa003au8" path="res://items/pickup.tscn" id="1_iwbc6"]
+[ext_resource type="Script" uid="uid://dq72686q4tfv5" path="res://scripts/pickup_test.gd" id="2_jtgcf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wh7xs"]
+resource_local_to_scene = true
+
+[node name="bell_area" unique_id=259076975 instance=ExtResource("1_iwbc6")]
+script = ExtResource("2_jtgcf")
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=399693202]
+shape = SubResource("BoxShape3D_wh7xs")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="1" unique_id=2068495577]
