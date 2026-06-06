@@ -181,6 +181,7 @@ scale = Vector2(0.4273974, 0.4273974)
 texture = ExtResource("4_6uk0c")
 script = ExtResource("3_fldqh")
 matchstick_textures = Array[Texture2D]([ExtResource("2_l5pwb"), ExtResource("4_6uk0c")])
+matchstick_health = 15.0
 
 [node name="litpos" type="Control" parent="bottomleft/matchstickgui" unique_id=228410676]
 anchors_preset = 0

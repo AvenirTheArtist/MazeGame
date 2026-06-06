@@ -2,12 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://dw5g1fa003au8" path="res://items/pickup.tscn" id="1_x7nvl"]
 [ext_resource type="Script" uid="uid://ca8l3wublm5jj" path="res://scripts/matchstick.gd" id="2_lxy66"]
+[ext_resource type="Texture2D" uid="uid://cljoj8tkr5g8q" path="res://images/matchstick.png" id="3_k10v6"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_x7nvl"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_a0d6w"]
 resource_local_to_scene = true
 
 [node name="matchstick" unique_id=259076975 instance=ExtResource("1_x7nvl")]
 script = ExtResource("2_lxy66")
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=399693202]
-shape = SubResource("BoxShape3D_x7nvl")
+shape = SubResource("BoxShape3D_a0d6w")
+debug_color = Color(1.3087615, 1.353256, 0, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="1" unique_id=638137135]
+transform = Transform3D(0.057, 0, 0, 0, 0.057, 0, 0, 0, 0.057, 0, 0, 0)
+billboard = 1
+texture = ExtResource("3_k10v6")
