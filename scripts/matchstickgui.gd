@@ -42,8 +42,16 @@ func _process(_delta: float) -> void:
 			texture = null
 			
 func start_burning() -> void:
+	if current_stage == stages.LIT:
+		return
 	if Global.player.matchstick_amount <= 0:
 		return
+	if current_stage == stages.LIT:
+		Global.player.matchstick_amount -= 1
+	animplayer.play("matchgoingdown")
+	animplayer.queue("matchcomingup")
+	await animplayer.animation_changed
+
 	Global.player.change_lantern_brightness(2.5)
 	burnouttimer.start(matchstick_health)
 	current_stage = stages.LIT

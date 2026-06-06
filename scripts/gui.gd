@@ -5,7 +5,7 @@ extends Control
 @onready var animplayer: AnimationPlayer = $AnimationPlayer
 @onready var topleft = {
 	"hp": $topleft/hp,
-	"stamina": $topleft/stamina
+	"stamina": $bottommiddle/stamina
 }
 @onready var topright = {
 	"bells": $topright/bells_collected
