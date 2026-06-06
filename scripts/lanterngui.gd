@@ -29,14 +29,7 @@ func _process(_delta: float) -> void:
 			start_dying()
 		else: pass
 	
-	#if matchstick.burning:
-		#if lanternburning:
-			#Global.player.change_lantern_brightness(9.0)
-		#else: Global.player.change_lantern_brightness(2.5)
-	#if !matchstick.burning:
-		#if lanternburning:
-			#Global.player.change_lantern_brightness(5)
-		#else: Global.player.change_lantern_brightness(1)
+	
 	
 	match current_stage:
 		stages.UNLIT:
