@@ -70,11 +70,8 @@ func _input(event) -> void:
 		head.rotation_degrees.x -= event.relative.y * sensitivity
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
-func add_lantern_brightness(value: float) -> void:
-	light_lantern.light_energy += value
-
 func change_lantern_brightness(value: float) -> void:
-	light_lantern.light_energy = value
+	light_lantern.light_energy += value
 
 ## when the ghost touches you it sends its head position 
 ## and your camera snaps to its head pos for a "jumpscare"

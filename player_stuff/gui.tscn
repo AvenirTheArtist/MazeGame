@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cn147efb2m4d3" path="res://images/firesprite.png" id="3_a72ct"]
 [ext_resource type="Script" uid="uid://dud7j7dedy5td" path="res://scripts/matchstickgui.gd" id="3_fldqh"]
 [ext_resource type="Texture2D" uid="uid://dslrupb447ixa" path="res://images/burntmatchstick.png" id="4_6uk0c"]
+[ext_resource type="PackedScene" uid="uid://c0a40y8c2oaxq" path="res://player_stuff/match_hud_icon.tscn" id="6_5gbqd"]
 [ext_resource type="Texture2D" uid="uid://cmx6wfby2ryjh" path="res://images/litlantern.png" id="6_fffk0"]
 [ext_resource type="Shader" uid="uid://c7w2wwk2il3nn" path="res://shaders/gui_pixelated.gdshader" id="6_y0ual"]
 [ext_resource type="Script" uid="uid://m8pppaw2287k" path="res://scripts/lanterngui.gd" id="7_82v4m"]
@@ -276,6 +277,16 @@ offset = Vector2(0, -200)
 [node name="burnouttimer" type="Timer" parent="bottomleft/matchstickgui" unique_id=1314475471]
 wait_time = 10.0
 one_shot = true
+
+[node name="matches_in_reserve" type="HBoxContainer" parent="bottomleft" unique_id=1817823158]
+layout_mode = 0
+offset_top = -35.0
+offset_right = 40.0
+offset_bottom = 5.0
+scale = Vector2(1.3045032, 1.3045032)
+
+[node name="match_hud_icon" parent="bottomleft/matches_in_reserve" unique_id=1050240310 instance=ExtResource("6_5gbqd")]
+layout_mode = 2
 
 [node name="bottomright" type="Control" parent="." unique_id=1517915056]
 layout_mode = 1

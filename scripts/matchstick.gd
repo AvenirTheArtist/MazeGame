@@ -7,5 +7,6 @@ func picked_up() -> void:
 		player.gui.animplayer.play("matchcomingup")
 		player.gui.bottomleft.matchstick.current_stage = player.gui.bottomleft.matchstick.stages.UNLIT
 	player.matchstick_amount += 1
+	player.gui.change_matches_count(player.matchstick_amount)
 	print("picked up match")
 	queue_free()
