@@ -24,6 +24,7 @@ var matchstick_amount: int = 2
 
 @onready var head = $head
 @onready var light_lantern = $OmniLight3D
+@onready var gui = $head/gui
 
 func _ready() -> void:
 	Global.player = self
