@@ -18,7 +18,7 @@ var sprinting = false
 var can_rotate = true
 
 var lantern_empowered = false
-var lantern_time: float
+var lantern_time: float = 20
 
 var matchstick_amount: int = 2
 
@@ -30,7 +30,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
-	
+	light_lantern.light_energy = clampf(light_lantern.light_energy, 1, 99)
 	## /// beginning of movement
 	
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
@@ -68,6 +68,9 @@ func _input(event) -> void:
 		head.rotation_degrees.y -= event.relative.x * sensitivity
 		head.rotation_degrees.x -= event.relative.y * sensitivity
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+
+func add_lantern_brightness(value: float) -> void:
+	light_lantern.light_energy += value
 
 func change_lantern_brightness(value: float) -> void:
 	light_lantern.light_energy = value

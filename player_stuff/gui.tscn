@@ -249,6 +249,7 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_6uk0c")
 script = ExtResource("3_fldqh")
 matchstick_textures = Array[Texture2D]([ExtResource("2_l5pwb"), ExtResource("4_6uk0c")])
+matchstick_health = 10.0
 
 [node name="litpos" type="Control" parent="bottomleft/matchstickgui" unique_id=228410676]
 anchors_preset = 0
@@ -273,7 +274,7 @@ autoplay = "empty"
 offset = Vector2(0, -200)
 
 [node name="burnouttimer" type="Timer" parent="bottomleft/matchstickgui" unique_id=1314475471]
-wait_time = 5.0
+wait_time = 10.0
 one_shot = true
 
 [node name="bottomright" type="Control" parent="." unique_id=1517915056]
@@ -295,7 +296,7 @@ offset_top = -483.00006
 offset_right = 582.0
 offset_bottom = 540.99994
 scale = Vector2(0.47235283, 0.47235283)
-texture = ExtResource("6_fffk0")
+texture = ExtResource("8_cw60c")
 script = ExtResource("7_82v4m")
 lantern_textutes = Array[Texture2D]([ExtResource("8_cw60c"), ExtResource("6_fffk0")])
 

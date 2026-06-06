@@ -15,16 +15,13 @@ enum stages {UNLIT, LIT, HALFWAY_LIT, NONE}
 var burning: bool = false
 var current_stage: stages = stages.UNLIT
 
-
+var matchstick_strength: float = 3
 
 func _ready() -> void:
 	matchstickanims.play("matchcomingup")
 	
 func _process(_delta: float) -> void:
 
-
-
-	
 	if Input.is_action_just_pressed("matchstick"):
 		start_burning()
 	if Input.is_action_just_pressed("lantern"):
@@ -47,10 +44,16 @@ func _process(_delta: float) -> void:
 			texture = matchstick_textures[0]
 			fireanim.play("empty")
 		stages.NONE:
+			if Global.player.matchstick_amount > 0:
+				current_stage = stages.UNLIT
+				grab_matchstick()
 			burning = false
 			fireanim.play("empty")
 			texture = null
 			
+func grab_matchstick():
+	matchstickanims.play("matchcomingup")
+
 func start_burning() -> void:
 	if burning == true:
 		return
@@ -64,27 +67,28 @@ func start_burning() -> void:
 
 	burnouttimer.start(matchstick_health)
 	current_stage = stages.LIT
+	Global.player.add_lantern_brightness(matchstick_strength)
 	
 	fireanim.play("enterfire")
 	await fireanim.animation_finished
 	fireanim.play("animatedfire")
 
 func burnout() -> void:
+	Global.player.add_lantern_brightness(-matchstick_strength)
 	current_stage = stages.NONE
 	fireanim.play("empty")
 	Global.player.matchstick_amount -= 1
 	if Global.player.matchstick_amount >= 1:
 		current_stage = stages.UNLIT
 		matchstickanims.play("matchcomingup")
-	else: current_stage = stages.NONE
-
+	
 func light_lantern():
 	if burning == false:
 		return
 	matchstickanims.play("matchgoingdown")
-	burnouttimer.paused
 	await matchstickanims.animation_finished
-	burnouttimer.timeout
+	burnouttimer.stop()
+	burnouttimer.timeout.emit()
 
 func _on_burnouttimer_timeout() -> void:
 	burnout()
