@@ -54,7 +54,7 @@ func start_buring():
 	lanternanim.queue("lanterngoingup")
 	await lanternanim.animation_changed
 	if current_stage == stages.UNLIT:
-		Global.player.add_lantern_brightness(empowered_strength)
+		Global.player.change_lantern_brightness(empowered_strength)
 		current_stage = stages.LIT
 	burnouttimer.start(lantern_health)
 	
@@ -66,10 +66,10 @@ func start_buring():
 
 func start_dying():
 	current_stage = stages.DYING
-	Global.player.add_lantern_brightness(-empowered_strength * 2/3)
+	Global.player.change_lantern_brightness(-empowered_strength * 2/3)
 
 func burnout():
-	Global.player.add_lantern_brightness(-empowered_strength * 1/3)
+	Global.player.change_lantern_brightness(-empowered_strength * 1/3)
 	current_stage = stages.UNLIT
 
 func _on_burnouttimer_timeout() -> void:

@@ -67,17 +67,18 @@ func start_burning() -> void:
 
 	burnouttimer.start(matchstick_health)
 	current_stage = stages.LIT
-	Global.player.add_lantern_brightness(matchstick_strength)
+	Global.player.change_lantern_brightness(matchstick_strength)
 	
 	fireanim.play("enterfire")
 	await fireanim.animation_finished
 	fireanim.play("animatedfire")
 
 func burnout() -> void:
-	Global.player.add_lantern_brightness(-matchstick_strength)
+	Global.player.change_lantern_brightness(-matchstick_strength)
 	current_stage = stages.NONE
 	fireanim.play("empty")
 	Global.player.matchstick_amount -= 1
+	Global.player.gui.change_matches_count(Global.player.matchstick_amount)
 	if Global.player.matchstick_amount >= 1:
 		current_stage = stages.UNLIT
 		matchstickanims.play("matchcomingup")
