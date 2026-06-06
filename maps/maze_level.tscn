@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dultbd2gt3mx4" path="res://images/walltexture.png" id="2_7dgl2"]
 [ext_resource type="PackedScene" uid="uid://duti8b7dsrn3r" path="res://player_stuff/player.tscn" id="3_14f4v"]
 [ext_resource type="PackedScene" uid="uid://dtckck82aj13t" path="res://entities/ghost.tscn" id="4_4apov"]
+[ext_resource type="PackedScene" uid="uid://0ibwvoq4ld7p" path="res://items/bell_area.tscn" id="5_14f4v"]
+[ext_resource type="PackedScene" uid="uid://bfg7wpgtg2le3" path="res://items/matchstick_example.tscn" id="6_4apov"]
 
 [sub_resource type="Environment" id="Environment_17l5i"]
 ambient_light_source = 1
@@ -183,7 +185,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -29)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -25)
 
 [node name="20" type="Marker3D" parent="patrol_positions" unique_id=1460110567 groups=["patrol_marker"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -13)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.285714, 0, -17.285713)
 
 [node name="21" type="Marker3D" parent="patrol_positions" unique_id=1590349105 groups=["patrol_marker"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -14)
@@ -207,7 +209,60 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -14)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -6)
 
 [node name="28" type="Marker3D" parent="patrol_positions" unique_id=1467073923 groups=["patrol_marker"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.285714, 0, -8.714287)
 
 [node name="29" type="Marker3D" parent="patrol_positions" unique_id=98422306 groups=["patrol_marker"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 7)
+
+[node name="bell_area" parent="." unique_id=259076975 instance=ExtResource("5_14f4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 1, 34)
+
+[node name="bell_area2" parent="." unique_id=47071811 instance=ExtResource("5_14f4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 1, 38)
+
+[node name="bell_area3" parent="." unique_id=1089658808 instance=ExtResource("5_14f4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 1, 9)
+
+[node name="bell_area5" parent="." unique_id=152441395 instance=ExtResource("5_14f4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 1, -35)
+
+[node name="bell_area6" parent="." unique_id=1594543102 instance=ExtResource("5_14f4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 1, -20)
+
+[node name="bell_area7" parent="." unique_id=322219515 instance=ExtResource("5_14f4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, -7)
+
+[node name="bell_area4" parent="." unique_id=2002855857 instance=ExtResource("5_14f4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4, 1, -19)
+
+[node name="pickups_other" type="Node3D" parent="." unique_id=1696715400]
+
+[node name="matchstick" parent="pickups_other" unique_id=1935329405 instance=ExtResource("6_4apov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 41)
+
+[node name="matchstick2" parent="pickups_other" unique_id=1413213159 instance=ExtResource("6_4apov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.2, 1, 5.3)
+
+[node name="matchstick3" parent="pickups_other" unique_id=254190392 instance=ExtResource("6_4apov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.6, 1, 37.8)
+
+[node name="matchstick4" parent="pickups_other" unique_id=1539635258 instance=ExtResource("6_4apov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.5, 1, 18.099998)
+
+[node name="matchstick5" parent="pickups_other" unique_id=1614397063 instance=ExtResource("6_4apov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 1, -4.3000016)
+
+[node name="matchstick6" parent="pickups_other" unique_id=1543713018 instance=ExtResource("6_4apov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 1, -38.300003)
+
+[node name="matchstick7" parent="pickups_other" unique_id=46899530 instance=ExtResource("6_4apov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.5, 1, -40.300003)
+
+[node name="matchstick8" parent="pickups_other" unique_id=226674551 instance=ExtResource("6_4apov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.5, 1, -36.300003)
+
+[node name="matchstick9" parent="pickups_other" unique_id=230468311 instance=ExtResource("6_4apov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 1, -29.300003)
+
+[node name="matchstick10" parent="pickups_other" unique_id=546860673 instance=ExtResource("6_4apov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 1, -27.300003)

@@ -2,6 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bdqok8eh5tmtn" path="res://scripts/player.gd" id="1_t7sdc"]
 [ext_resource type="PackedScene" uid="uid://2ywcafmf5l5v" path="res://player_stuff/gui.tscn" id="2_fp3om"]
+[ext_resource type="Shader" uid="uid://dch6x6e0sxac8" path="res://pixelated_2.gdshader" id="2_gcccv"]
+
+[sub_resource type="Compositor" id="Compositor_43wku"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_43wku"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajkmv"]
+render_priority = 0
+shader = ExtResource("2_gcccv")
+shader_parameter/pixel_size = 8.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3om"]
 radius = 0.3540039
@@ -14,6 +24,14 @@ script = ExtResource("1_t7sdc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4341842, 0)
 
 [node name="Camera3D" type="Camera3D" parent="head" unique_id=467861943]
+compositor = SubResource("Compositor_43wku")
+current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="head/Camera3D" unique_id=1864048614]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.1)
+visible = false
+mesh = SubResource("PlaneMesh_43wku")
+surface_material_override/0 = SubResource("ShaderMaterial_ajkmv")
 
 [node name="interact_ray" type="RayCast3D" parent="head" unique_id=290034765]
 target_position = Vector3(0, 0, -3)
@@ -26,6 +44,6 @@ shape = SubResource("CapsuleShape3D_fp3om")
 debug_color = Color(0, 0.6, 1, 1)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1321660507]
-light_color = Color(0.9098039, 0.60784316, 0, 1)
+light_color = Color(0.95, 0.534375, 0.2375, 1)
 omni_range = 35.0
 omni_attenuation = 1.15

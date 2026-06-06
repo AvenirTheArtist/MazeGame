@@ -22,6 +22,7 @@ var lantern_time: float
 var matchstick_amount: int = 2
 
 @onready var head = $head
+@onready var light_lantern = $OmniLight3D
 
 func _ready() -> void:
 	Global.player = self
@@ -71,8 +72,8 @@ func _input(event) -> void:
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 
-func change_lantern(value: float) -> void:
-	pass
+func change_lantern_brightness(value: float) -> void:
+	light_lantern.light_energy = value
 
 
 func take_damage(damage_taken: float) -> void:

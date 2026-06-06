@@ -41,9 +41,10 @@ func _process(_delta: float) -> void:
 			fireanim.play("empty")
 			texture = null
 			
-func start_burning():
+func start_burning() -> void:
 	if Global.player.matchstick_amount <= 0:
 		return
+	Global.player.change_lantern_brightness(2.5)
 	burnouttimer.start(matchstick_health)
 	current_stage = stages.LIT
 	burning = true
@@ -52,7 +53,8 @@ func start_burning():
 	await fireanim.animation_finished
 	fireanim.play("animatedfire")
 
-func burnout():
+func burnout() -> void:
+	Global.player.change_lantern_brightness(1.0)
 	burning = false
 	current_stage = stages.NONE
 	fireanim.play("empty")

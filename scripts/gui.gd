@@ -11,7 +11,7 @@ extends Control
 	"bells": $topright/bells_collected
 }
 @onready var bottomleft = {
-	"matchstick": $bottomleft/matchstick
+	"matchstick": $bottomleft/matchstickgui
 }
 
 func _process(_delta: float) -> void:
