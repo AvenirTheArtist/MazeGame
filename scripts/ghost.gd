@@ -87,3 +87,10 @@ func _on_navigation_agent_3d_target_reached() -> void:
 		states.ALERTED:
 			next_dest = update_roaming()
 			state = states.ROAMING
+
+## kill the player
+func _on_kill_area_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		var look_pos = self.global_position
+		look_pos.y += 1
+		player.die(look_pos)
