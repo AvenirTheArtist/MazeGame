@@ -56,7 +56,9 @@ func start_buring():
 	await lanternanim.animation_changed
 	if current_stage == stages.UNLIT:
 		Global.player.change_lantern_brightness(empowered_strength)
-		current_stage = stages.LIT
+	if current_stage == stages.DYING:
+		Global.player.change_lantern_brightness(empowered_strength * 2/3)
+	current_stage = stages.LIT
 	burnouttimer.start(lantern_health)
 	Global.player.lantern_hitbox.disabled = false
 	fireanim.play("enterfire")
