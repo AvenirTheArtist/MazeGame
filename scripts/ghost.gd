@@ -42,8 +42,8 @@ func _physics_process(delta: float) -> void:
 				randomize()
 				update_timer += 0.2 + rand
 		
-		states.STUNNED:
-			next_dest = self.global_position
+		#states.STUNNED:
+			#next_dest = self.global_position
 	#endregion
 	
 	nav.target_position = next_dest
@@ -78,7 +78,13 @@ func get_stunned() -> void:
 	if stun_immunity > 0: return
 	player_proximity.get_child(0).disabled = true
 	state = states.STUNNED
-	next_dest = self.global_position
+	var defined_pos = Vector3.ZERO
+	while defined_pos == Vector3.ZERO:
+		var i = patrol_pos.pick_random()
+		var dist = (i - self.global_position).length()
+		if dist > 10 and dist < 25:
+			defined_pos = i
+	next_dest = defined_pos
 	stun_immunity = 15.0
 	await get_tree().create_timer(
 		5.0, false
