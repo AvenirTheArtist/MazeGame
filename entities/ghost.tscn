@@ -19,7 +19,7 @@ radius = 8.0
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4a7c8"]
 radius = 0.3
 
-[node name="ghost" type="CharacterBody3D" unique_id=1867606666]
+[node name="ghost" type="CharacterBody3D" unique_id=1867606666 groups=["ghost"]]
 script = ExtResource("1_4a7c8")
 speed = 5.3
 patrol_pos = Array[Vector3]([Vector3(1, 1, 4), Vector3(-2, 1, 6), Vector3(-8, 1, 2), Vector3(0, 1, -4)])
