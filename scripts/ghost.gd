@@ -14,7 +14,9 @@ var next_dest: Vector3
 
 var state = states.ROAMING
 var update_timer = 0.0
+var stun_immunity = 0.0
 
+@onready var player_proximity = $player_proximity_detection
 @onready var nav = $NavigationAgent3D
 @onready var player = get_tree().get_first_node_in_group("player")
 
@@ -26,18 +28,22 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	## tick it down, while this is more than 0 the ghost will not be stunned
+	if stun_immunity > 0:
+		stun_immunity -= delta
+	
 	#region /// updating navigation 
 	match state:
 		states.CHASING:
 			update_timer -= delta
 			if update_timer <= 0:
+				next_dest = player.global_position
 				var rand = randf_range(-0.1, 0.1)
 				randomize()
 				update_timer += 0.2 + rand
-			next_dest = player.global_position
 		
-		states.STUNNED:
-			next_dest = self.global_position
+		#states.STUNNED:
+			#next_dest = self.global_position
 	#endregion
 	
 	nav.target_position = next_dest
@@ -67,6 +73,26 @@ func move_to_bell(pos) -> void:
 		state = states.ALERTED
 		next_dest = alerted_pos
 
+## TEST TEST TEST 5 seconds of stun is ok?
+func get_stunned() -> void:
+	if stun_immunity > 0: return
+	player_proximity.get_child(0).disabled = true
+	state = states.STUNNED
+	var defined_pos = Vector3.ZERO
+	while defined_pos == Vector3.ZERO:
+		var i = patrol_pos.pick_random()
+		var dist = (i - self.global_position).length()
+		if dist > 10 and dist < 25:
+			defined_pos = i
+	next_dest = defined_pos
+	stun_immunity = 15.0
+	await get_tree().create_timer(
+		5.0, false
+	).timeout
+	state = states.ROAMING
+	player_proximity.get_child(0).disabled = false
+	
+
 ## start chase when player_proximity_detection sees a player
 func _on_player_proximity_detection_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
@@ -74,7 +100,7 @@ func _on_player_proximity_detection_body_entered(body: Node3D) -> void:
 
 
 func _on_player_proximity_detection_body_exited(body: Node3D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and not state == states.STUNNED:
 		next_dest = update_roaming()
 		state = states.ROAMING
 
@@ -90,7 +116,5 @@ func _on_navigation_agent_3d_target_reached() -> void:
 
 ## kill the player
 func _on_kill_area_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player"):
-		var look_pos = self.global_position
-		look_pos.y += 1
-		player.die(look_pos)
+	if body.is_in_group("player") and state != states.STUNNED:
+		player.die()

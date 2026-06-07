@@ -3,8 +3,7 @@ extends Control
 @onready var player = get_parent().get_parent()
 @onready var map = player.get_parent()
 @onready var animplayer: AnimationPlayer = $matchstickanims
-@onready var topleft = {
-	"hp": $topleft/hp,
+@onready var bottommiddle = {
 	"stamina": $bottommiddle/stamina
 }
 @onready var topright = {
@@ -19,8 +18,7 @@ func _ready() -> void:
 	change_matches_count(2)
 
 func _process(_delta: float) -> void:
-	topleft.hp.value = player.hp
-	topleft.stamina.value = player.stamina
+	bottommiddle.stamina.value = player.stamina
 	topright.bells.text = str(map.bells_collected) + "/" + str(map.number_of_bells) + " bells rung"
 	
 

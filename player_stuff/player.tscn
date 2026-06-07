@@ -13,6 +13,9 @@ render_priority = 0
 shader = ExtResource("2_gcccv")
 shader_parameter/pixel_size = 8.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gcccv"]
+size = Vector3(4, 2, 5)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3om"]
 radius = 0.3540039
 
@@ -39,6 +42,18 @@ collision_mask = 2
 
 [node name="gui" parent="head" unique_id=844792369 instance=ExtResource("2_fp3om")]
 
+[node name="stun_area" type="Area3D" parent="head" unique_id=388403551]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="head/stun_area" unique_id=309231877]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.85)
+shape = SubResource("BoxShape3D_gcccv")
+disabled = true
+debug_color = Color(0, 1, 0.049999952, 1)
+
+[node name="los_detection_ray" type="RayCast3D" parent="head/stun_area" unique_id=1550685636]
+target_position = Vector3(0, 0, -6)
+debug_shape_custom_color = Color(0.17, 0.68, 0, 0.37254903)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1510286024]
 shape = SubResource("CapsuleShape3D_fp3om")
 debug_color = Color(0, 0.6, 1, 1)
@@ -47,3 +62,6 @@ debug_color = Color(0, 0.6, 1, 1)
 light_color = Color(0.95, 0.534375, 0.2375, 1)
 omni_range = 35.0
 omni_attenuation = 1.15
+
+[connection signal="body_entered" from="head/stun_area" to="." method="_on_stun_area_body_entered"]
+[connection signal="body_exited" from="head/stun_area" to="." method="_on_stun_area_body_exited"]

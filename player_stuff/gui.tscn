@@ -198,17 +198,6 @@ libraries/ = SubResource("AnimationLibrary_y0ual")
 [node name="lanternanim" type="AnimationPlayer" parent="." unique_id=1219566592]
 libraries/ = SubResource("AnimationLibrary_ooum0")
 
-[node name="topleft" type="Control" parent="." unique_id=1532966660]
-layout_mode = 1
-anchors_preset = 0
-
-[node name="hp" type="ProgressBar" parent="topleft" unique_id=1344728334]
-visible = false
-modulate = Color(1, 0.23921569, 0.23921569, 1)
-layout_mode = 0
-offset_right = 450.0
-offset_bottom = 30.0
-
 [node name="topright" type="Control" parent="." unique_id=56690247]
 layout_mode = 1
 anchors_preset = 1
@@ -324,17 +313,6 @@ offset = Vector2(0, -200)
 wait_time = 5.0
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=24843649]
-layer = 5
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=885447942]
-material = SubResource("ShaderMaterial_fffk0")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="bottommiddle" type="Control" parent="." unique_id=406630806]
 layout_mode = 1
 anchors_preset = 7
@@ -361,6 +339,17 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(1.3288503, 1.3288503)
 show_percentage = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=24843649]
+layer = 5
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=885447942]
+material = SubResource("ShaderMaterial_fffk0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="animation_finished" from="bottomleft/matchstickgui/fireanim" to="bottomleft/matchstickgui" method="_on_fireanim_animation_finished"]
 [connection signal="timeout" from="bottomleft/matchstickgui/burnouttimer" to="bottomleft/matchstickgui" method="_on_burnouttimer_timeout"]

@@ -50,6 +50,7 @@ func _process(_delta: float) -> void:
 func start_buring():
 	if !matchstick.burning:
 		return
+	
 	lanternanim.play("lanterngoingdown")
 	lanternanim.queue("lanterngoingup")
 	await lanternanim.animation_changed
@@ -57,14 +58,14 @@ func start_buring():
 		Global.player.change_lantern_brightness(empowered_strength)
 		current_stage = stages.LIT
 	burnouttimer.start(lantern_health)
-	
-
-	
+	Global.player.lantern_hitbox.disabled = false
 	fireanim.play("enterfire")
 	await fireanim.animation_finished
 	fireanim.play("animatedfire")
+	
 
 func start_dying():
+	Global.player.lantern_hitbox.disabled = true
 	current_stage = stages.DYING
 	Global.player.change_lantern_brightness(-empowered_strength * 2/3)
 
