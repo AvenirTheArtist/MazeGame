@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dtckck82aj13t"]
 
 [ext_resource type="Script" uid="uid://b2okvfvocwsce" path="res://scripts/ghost.gd" id="1_4a7c8"]
+[ext_resource type="AudioStream" uid="uid://bklgrg54i47lq" path="res://sounds/proximitysound.mp3" id="2_rbinr"]
+[ext_resource type="AudioStream" uid="uid://cfu7jbs8vhuki" path="res://sounds/scream.wav" id="3_8bw8y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rbinr"]
 radius = 0.01
@@ -14,7 +16,7 @@ radius = 0.3
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4a7c8"]
 resource_local_to_scene = true
-radius = 8.0
+radius = 12.10791
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4a7c8"]
 radius = 0.3
@@ -51,10 +53,25 @@ billboard = 2
 [node name="sound_player" type="Node3D" parent="." unique_id=114506489]
 
 [node name="proximity_sound" type="AudioStreamPlayer3D" parent="sound_player" unique_id=72392308]
+stream = ExtResource("2_rbinr")
+volume_db = 1.0
+max_db = -1.0
+autoplay = true
+max_distance = 10.0
+panning_strength = 2.0
 
-[node name="alerted_sream" type="AudioStreamPlayer3D" parent="sound_player" unique_id=173091261]
+[node name="alerted_scream" type="AudioStreamPlayer3D" parent="sound_player" unique_id=173091261]
+stream = ExtResource("3_8bw8y")
+volume_db = 2.0
+max_db = 5.0
+pitch_scale = 1.2
+panning_strength = 1.25
 
 [node name="stunned" type="AudioStreamPlayer3D" parent="sound_player" unique_id=1009304791]
+stream = ExtResource("3_8bw8y")
+attenuation_model = 2
+max_db = 5.0
+pitch_scale = 0.9
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="body_entered" from="player_proximity_detection" to="." method="_on_player_proximity_detection_body_entered"]
