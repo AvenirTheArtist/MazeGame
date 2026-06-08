@@ -18,11 +18,15 @@ func play(sound_name: String):
 		return
 	sound_to_play.play()
 	
-func rand_play(sound_name: String, min: float = 1.1, max: float = 1.2):
+func randp_play(sound_name: String, minp: float = 1.1, maxp: float = 1.2):
 	var sound_to_play = all_sounds[str(sound_name).to_lower()]
 	if sound_to_play.playing:
 		return
 
-	sound_to_play.pitch_scale = randf_range(min, max)
+	sound_to_play.pitch_scale = randf_range(minp, maxp)
 	sound_to_play.play()
-	
+
+func stop_playing(sound_name: String):
+	var sound_to_stop = all_sounds[str(sound_name).to_lower()]
+	if sound_to_stop.playing:
+		sound_to_stop.stop()

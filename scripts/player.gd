@@ -89,7 +89,7 @@ func change_lantern_brightness(value: float) -> void:
 ## when the ghost touches you this finds ghost's head position
 ## and your camera snaps to its head pos for a "jumpscare"
 func die() -> void:
-	#$death_sound.play() ## ATTENTION replace this with a sound 
+	Global.player_sounds.play("jumpscare")
 	var look_pos: Vector3
 	look_pos = ghost.global_position
 	look_pos.y += 1.0

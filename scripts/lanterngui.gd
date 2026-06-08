@@ -37,14 +37,18 @@ func _process(_delta: float) -> void:
 			lanternburning = false
 			fireanim.play("empty")
 			texture = lantern_textutes[0]
+			Global.player_sounds.stop_playing("lantern_burning_dying")
+			Global.player_sounds.stop_playing("lantern_burning_empowered")
 		stages.LIT:
 			Global.player.lantern_empowered = true
 			lanternburning = true
 			texture = lantern_textutes[1]
+			Global.player_sounds.play("lantern_burning_empowered")
 		stages.DYING:
 			Global.player.lantern_empowered = false
 			lanternburning = true
 			texture = lantern_textutes[0]
+			Global.player_sounds.play("lantern_burning_dying")
 
 		
 func start_buring():
@@ -52,8 +56,11 @@ func start_buring():
 		return
 	
 	lanternanim.play("lanterngoingdown")
+	Global.player_sounds.randp_play("lantern_clink2", 0.8, 1.1)
 	lanternanim.queue("lanterngoingup")
 	await lanternanim.animation_changed
+	Global.player_sounds.randp_play("lantern_clink1", 0.8, 1.1)
+
 	if current_stage == stages.UNLIT:
 		Global.player.change_lantern_brightness(empowered_strength)
 	if current_stage == stages.DYING:

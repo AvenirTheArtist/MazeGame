@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bqt2iqbc1ygfu"
-path="res://.godot/imported/vroosh.wav-f2c14f411b99ceb10fbbca2ba8fa7350.sample"
+path="res://.godot/imported/vroosh.wav-d3b587ab3999d41a83aba1ea04e405b4.sample"
 
 [deps]
 
-source_file="res://sounds/fire/vroosh.wav"
-dest_files=["res://.godot/imported/vroosh.wav-f2c14f411b99ceb10fbbca2ba8fa7350.sample"]
+source_file="res://sounds/vroosh.wav"
+dest_files=["res://.godot/imported/vroosh.wav-d3b587ab3999d41a83aba1ea04e405b4.sample"]
 
 [params]
 

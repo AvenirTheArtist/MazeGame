@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://dqyk4ixaku320" path="res://scripts/player_sounds.gd" id="1_74cct"]
 [ext_resource type="AudioStream" uid="uid://di66303gpd40y" path="res://sounds/fire/click.wav" id="2_p7eyv"]
 [ext_resource type="AudioStream" uid="uid://5btgpg58eib6" path="res://sounds/fire/lightup.wav" id="3_n10jv"]
+[ext_resource type="AudioStream" uid="uid://d0tnyddqs7c2b" path="res://sounds/fire/fireburning.wav" id="4_236io"]
+[ext_resource type="AudioStream" uid="uid://dg3cyu6s2fot5" path="res://sounds/fire/firecrackling.mp3" id="5_xyg0d"]
+[ext_resource type="AudioStream" uid="uid://e0m26g20bptg" path="res://sounds/fire/lantern_clink1.mp3" id="6_n46b5"]
+[ext_resource type="AudioStream" uid="uid://dtwxhs8jis0pa" path="res://sounds/fire/lantern_clink2.mp3" id="7_es3gr"]
+[ext_resource type="AudioStream" uid="uid://dr8t75mt6kprf" path="res://sounds/aggressive noise.mp3" id="8_es3gr"]
 
 [node name="PlayerSounds" type="AudioListener3D" unique_id=1554584262]
 script = ExtResource("1_74cct")
@@ -13,4 +18,27 @@ stream = ExtResource("2_p7eyv")
 [node name="start_burning" type="AudioStreamPlayer3D" parent="." unique_id=255949195]
 stream = ExtResource("3_n10jv")
 volume_db = -10.0
+max_db = -5.0
+
+[node name="match_burning" type="AudioStreamPlayer3D" parent="." unique_id=349524835]
+stream = ExtResource("4_236io")
+volume_db = -10.0
+max_db = -13.0
+
+[node name="lantern_burning_empowered" type="AudioStreamPlayer3D" parent="." unique_id=1671395121]
+stream = ExtResource("5_xyg0d")
+max_db = 0.0
+
+[node name="lantern_burning_dying" type="AudioStreamPlayer3D" parent="." unique_id=761370705]
+stream = ExtResource("5_xyg0d")
+max_db = -5.0
+
+[node name="lantern_clink1" type="AudioStreamPlayer3D" parent="." unique_id=121734408]
+stream = ExtResource("6_n46b5")
+
+[node name="lantern_clink2" type="AudioStreamPlayer3D" parent="." unique_id=1413024479]
+stream = ExtResource("7_es3gr")
+
+[node name="jumpscare" type="AudioStreamPlayer3D" parent="." unique_id=974489316]
+stream = ExtResource("8_es3gr")
 max_db = -5.0
