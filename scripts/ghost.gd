@@ -19,14 +19,28 @@ var stun_immunity = 0.0
 @onready var player_proximity = $player_proximity_detection
 @onready var nav = $NavigationAgent3D
 @onready var player = get_tree().get_first_node_in_group("player")
+@onready var sound_player: Node3D = $sound_player
+var all_sounds: Dictionary
+
 
 func _ready() -> void:
+	Global.enemy = self
+	for child in sound_player.get_children():
+		if child is AudioStreamPlayer3D:
+			all_sounds[child.name.to_lower()] = child
+	
 	get_parent().bell_collected.connect(move_to_bell)
 	for i in get_tree().get_nodes_in_group("patrol_marker"):
 		patrol_pos.append(i.global_position)
 	next_dest = update_roaming()
 
 func _physics_process(delta: float) -> void:
+	if !all_sounds["proximity_sound"].playing:
+		all_sounds["proximity_sound"].play()
+
+	#TEMPORARY
+	if Input.is_action_just_pressed("ui_accept"):
+		move_to_player()
 	
 	## tick it down, while this is more than 0 the ghost will not be stunned
 	if stun_immunity > 0:
@@ -41,7 +55,7 @@ func _physics_process(delta: float) -> void:
 				var rand = randf_range(-0.1, 0.1)
 				randomize()
 				update_timer += 0.2 + rand
-		
+			
 		#states.STUNNED:
 			#next_dest = self.global_position
 	#endregion
@@ -71,13 +85,22 @@ func move_to_bell(pos) -> void:
 	if state != states.CHASING:
 		alerted_pos = pos
 		state = states.ALERTED
+		all_sounds["alerted_scream"].play()
 		next_dest = alerted_pos
 
-## TEST TEST TEST 5 seconds of stun is ok?
+func move_to_player():
+	if state != states.CHASING:
+		alerted_pos = player.global_position
+		state = states.ALERTED
+		all_sounds["alerted_scream"].play()
+		next_dest = alerted_pos
+
+## TEST TEST TEST 5 seconds of stun is ok? yes for now, might change later
 func get_stunned() -> void:
 	if stun_immunity > 0: return
 	player_proximity.get_child(0).disabled = true
 	state = states.STUNNED
+	all_sounds["stunned"].play()
 	var defined_pos = Vector3.ZERO
 	while defined_pos == Vector3.ZERO:
 		var i = patrol_pos.pick_random()
@@ -97,6 +120,7 @@ func get_stunned() -> void:
 func _on_player_proximity_detection_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		state = states.CHASING
+		all_sounds["alerted_scream"].play()
 
 
 func _on_player_proximity_detection_body_exited(body: Node3D) -> void:
