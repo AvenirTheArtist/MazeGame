@@ -198,6 +198,19 @@ libraries/ = SubResource("AnimationLibrary_y0ual")
 [node name="lanternanim" type="AnimationPlayer" parent="." unique_id=1219566592]
 libraries/ = SubResource("AnimationLibrary_ooum0")
 
+[node name="topleft" type="Control" parent="." unique_id=207410149]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="matches_in_reserve" type="HBoxContainer" parent="topleft" unique_id=1817823158]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 80.0
+scale = Vector2(1.3045032, 1.3045032)
+
+[node name="match_hud_icon" parent="topleft/matches_in_reserve" unique_id=1050240310 instance=ExtResource("6_5gbqd")]
+layout_mode = 2
+
 [node name="topright" type="Control" parent="." unique_id=56690247]
 layout_mode = 1
 anchors_preset = 1
@@ -266,16 +279,6 @@ offset = Vector2(0, -200)
 [node name="burnouttimer" type="Timer" parent="bottomleft/matchstickgui" unique_id=1314475471]
 wait_time = 10.0
 one_shot = true
-
-[node name="matches_in_reserve" type="HBoxContainer" parent="bottomleft" unique_id=1817823158]
-layout_mode = 0
-offset_top = -35.0
-offset_right = 40.0
-offset_bottom = 5.0
-scale = Vector2(1.3045032, 1.3045032)
-
-[node name="match_hud_icon" parent="bottomleft/matches_in_reserve" unique_id=1050240310 instance=ExtResource("6_5gbqd")]
-layout_mode = 2
 
 [node name="bottomright" type="Control" parent="." unique_id=1517915056]
 layout_mode = 1

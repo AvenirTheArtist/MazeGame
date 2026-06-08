@@ -9,7 +9,7 @@ var hp = max_hp
 @export var acceleration = 10.0
 @export var max_stamina = 100.0
 var stamina = max_stamina
-@export var stamina_drain = 10.0
+@export var stamina_drain = 30.0
 @export var stamina_recovery = 7.0
 
 @export var sensitivity = 0.1

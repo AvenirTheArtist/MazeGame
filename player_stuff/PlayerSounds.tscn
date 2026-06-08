@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://blqv5ffmuucjp"]
+
+[ext_resource type="Script" uid="uid://dqyk4ixaku320" path="res://scripts/player_sounds.gd" id="1_74cct"]
+[ext_resource type="AudioStream" uid="uid://di66303gpd40y" path="res://sounds/fire/click.wav" id="2_p7eyv"]
+[ext_resource type="AudioStream" uid="uid://5btgpg58eib6" path="res://sounds/fire/lightup.wav" id="3_n10jv"]
+
+[node name="PlayerSounds" type="AudioListener3D" unique_id=1554584262]
+script = ExtResource("1_74cct")
+
+[node name="click" type="AudioStreamPlayer3D" parent="." unique_id=1811669032]
+stream = ExtResource("2_p7eyv")
+
+[node name="start_burning" type="AudioStreamPlayer3D" parent="." unique_id=255949195]
+stream = ExtResource("3_n10jv")
+volume_db = -10.0
+max_db = -5.0

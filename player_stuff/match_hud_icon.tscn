@@ -8,8 +8,8 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1755240204]
-position = Vector2(29.999998, 37.999996)
-scale = Vector2(0.1, 0.1)
+position = Vector2(43.25, 56.350006)
+scale = Vector2(0.14615385, 0.14615387)
 texture = ExtResource("1_y1hs8")
 region_enabled = true
 region_rect = Rect2(249, 148.29, 585.865, 767.215)

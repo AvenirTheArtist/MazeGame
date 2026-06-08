@@ -7,7 +7,7 @@ enum states {
 	CHASING,
 	STUNNED
 }
-@export var speed = 6.0
+@export var speed = 9.0
 @export var patrol_pos: Array[Vector3]
 var alerted_pos: Vector3
 var next_dest: Vector3

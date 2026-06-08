@@ -63,6 +63,8 @@ func start_burning() -> void:
 		Global.player.matchstick_amount -= 1
 	matchstickanims.play("matchgoingdown")
 	await matchstickanims.animation_finished
+	Global.player_sounds.rand_play("click", 0.8, 1.3)
+	Global.player_sounds.rand_play("start_burning", 0.8, 1.2)
 	matchstickanims.play("matchcomingup")
 
 	burnouttimer.start(matchstick_health)

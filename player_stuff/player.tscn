@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bdqok8eh5tmtn" path="res://scripts/player.gd" id="1_t7sdc"]
 [ext_resource type="PackedScene" uid="uid://2ywcafmf5l5v" path="res://player_stuff/gui.tscn" id="2_fp3om"]
 [ext_resource type="Shader" uid="uid://dch6x6e0sxac8" path="res://shaders/pixelated_2.gdshader" id="2_gcccv"]
+[ext_resource type="PackedScene" uid="uid://blqv5ffmuucjp" path="res://player_stuff/PlayerSounds.tscn" id="4_43wku"]
 
 [sub_resource type="Compositor" id="Compositor_43wku"]
 
@@ -54,6 +55,8 @@ debug_color = Color(0, 1, 0.049999952, 1)
 target_position = Vector3(0, 0, -6)
 debug_shape_custom_color = Color(0.17, 0.68, 0, 0.37254903)
 
+[node name="AudioListener3D" type="AudioListener3D" parent="head" unique_id=258039527]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1510286024]
 shape = SubResource("CapsuleShape3D_fp3om")
 debug_color = Color(0, 0.6, 1, 1)
@@ -62,6 +65,8 @@ debug_color = Color(0, 0.6, 1, 1)
 light_color = Color(0.95, 0.534375, 0.2375, 1)
 omni_range = 35.0
 omni_attenuation = 1.15
+
+[node name="PlayerSounds" parent="." unique_id=1554584262 instance=ExtResource("4_43wku")]
 
 [connection signal="body_entered" from="head/stun_area" to="." method="_on_stun_area_body_entered"]
 [connection signal="body_exited" from="head/stun_area" to="." method="_on_stun_area_body_exited"]
