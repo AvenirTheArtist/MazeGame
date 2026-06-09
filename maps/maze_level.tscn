@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cn4nyp8cm2sml"]
 
 [ext_resource type="Script" uid="uid://b1lbwmaketyu0" path="res://scripts/game_data.gd" id="1_7dgl2"]
-[ext_resource type="Texture2D" uid="uid://dultbd2gt3mx4" path="res://images/walltexture.png" id="2_7dgl2"]
+[ext_resource type="Texture2D" uid="uid://dultbd2gt3mx4" path="res://images/walltextureold.png" id="2_7dgl2"]
 [ext_resource type="PackedScene" uid="uid://duti8b7dsrn3r" path="res://player_stuff/player.tscn" id="3_14f4v"]
 [ext_resource type="PackedScene" uid="uid://dtckck82aj13t" path="res://entities/ghost.tscn" id="4_4apov"]
 [ext_resource type="PackedScene" uid="uid://0ibwvoq4ld7p" path="res://items/bell_area.tscn" id="5_14f4v"]
