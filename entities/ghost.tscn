@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dtckck82aj13t"]
 
 [ext_resource type="Script" uid="uid://b2okvfvocwsce" path="res://scripts/ghost.gd" id="1_4a7c8"]
-[ext_resource type="AudioStream" uid="uid://bklgrg54i47lq" path="res://sounds/proximitysound.mp3" id="2_rbinr"]
-[ext_resource type="AudioStream" uid="uid://cfu7jbs8vhuki" path="res://sounds/scream.wav" id="3_8bw8y"]
+[ext_resource type="AudioStream" uid="uid://bklgrg54i47lq" path="res://sounds/ghost/proximitysound.mp3" id="2_rbinr"]
+[ext_resource type="AudioStream" uid="uid://cfu7jbs8vhuki" path="res://sounds/ghost/scream.wav" id="3_8bw8y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rbinr"]
 radius = 0.01
