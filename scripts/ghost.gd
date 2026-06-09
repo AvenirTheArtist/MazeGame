@@ -82,6 +82,8 @@ func update_roaming() -> Vector3:
 
 ## move to a collected bell
 func move_to_bell(pos) -> void:
+	if state == states.STUNNED:
+		return
 	if state != states.CHASING:
 		alerted_pos = pos
 		state = states.ALERTED
@@ -118,9 +120,15 @@ func get_stunned() -> void:
 
 ## start chase when player_proximity_detection sees a player
 func _on_player_proximity_detection_body_entered(body: Node3D) -> void:
+	if state == states.STUNNED:
+		return
 	if body.is_in_group("player"):
-		state = states.CHASING
-		all_sounds["alerted_scream"].play()
+		if state == states.ROAMING:
+			state = states.CHASING
+			all_sounds["alerted_scream"].play()
+		if state == states.ROAMING:
+			state = states.CHASING
+			
 
 
 func _on_player_proximity_detection_body_exited(body: Node3D) -> void:
