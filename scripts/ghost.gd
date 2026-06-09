@@ -147,10 +147,10 @@ func _on_player_proximity_detection_body_entered(body: Node3D) -> void:
 		if state == states.ROAMING:
 			state = states.CHASING
 			all_sounds["alerted_scream"].play()
-		if state == states.ROAMING:
+			player_in_range = true
+		if state == states.ALERTED:
 			state = states.CHASING
-
-		player_in_range = true
+			player_in_range = true
 
 
 func _on_player_proximity_detection_body_exited(body: Node3D) -> void:
