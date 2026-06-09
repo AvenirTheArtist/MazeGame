@@ -7,9 +7,10 @@ enum states {
 	CHASING,
 	STUNNED
 }
+@export var roam_speed: float
+@export var alert_speed: float
 @export var chase_speed: float
 @export var stun_speed: float
-@export var alert_speed: float
 @export var patrol_pos: Array[Vector3]
 var alerted_pos: Vector3
 var next_dest: Vector3
@@ -64,9 +65,12 @@ func _physics_process(delta: float) -> void:
 	var speed_final: float
 	#region /// updating navigation 
 	match state:
+		states.ROAMING:
+			speed_final = roam_speed
 		states.ALERTED:
-			pass
+			speed_final = alert_speed
 		states.CHASING:
+			speed_final = chase_speed
 			update_timer -= delta
 			if update_timer <= 0:
 				next_dest = player.global_position
