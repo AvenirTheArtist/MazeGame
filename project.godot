@@ -14,6 +14,7 @@ config/name="mazegame"
 run/main_scene="uid://cmdj4mgmded3t"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+<<<<<<<HEADrun/main_scene="uid://cmdj4mgmded3t"
 
 [autoload]
 
