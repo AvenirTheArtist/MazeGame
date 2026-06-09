@@ -126,7 +126,7 @@ func get_stunned() -> void:
 	while defined_pos == Vector3.ZERO:
 		var i = patrol_pos.pick_random()
 		var dist = (i - self.global_position).length()
-		if dist > 10 and dist < 25:
+		if dist > 20 and dist < 40:
 			defined_pos = i
 	next_dest = defined_pos
 	stun_immunity = 6.0
