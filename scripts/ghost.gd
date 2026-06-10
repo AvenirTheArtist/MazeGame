@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 	if player_in_range:
 		los_ray.look_at(player.global_position)
 		if los_ray.is_colliding():
-			if los_ray.get_collider() is Player and state != states.CHASING:
+			if los_ray.get_collider() is Player and state != states.CHASING and state != states.STUNNED:
 				state = states.CHASING
 				all_sounds["alerted_scream"].play()
 				#print("found")
@@ -72,7 +72,7 @@ func _physics_process(delta: float) -> void:
 		states.CHASING:
 			speed_final = chase_speed
 			update_timer -= delta
-			if update_timer <= 0:
+			if update_timer <= 0 and state == states.CHASING:
 				next_dest = player.global_position
 				var rand = randf_range(-0.1, 0.1)
 				randomize()
@@ -116,7 +116,7 @@ func move_to_player():
 		all_sounds["alerted_scream"].play()
 		next_dest = alerted_pos
 
-## TEST TEST TEST changed stun duration to 9s
+## TEST TEST TEST changed stun duration to 3s
 func get_stunned() -> void:
 	if stun_immunity > 0: return
 	player_proximity.get_child(0).disabled = true
@@ -126,12 +126,12 @@ func get_stunned() -> void:
 	while defined_pos == Vector3.ZERO:
 		var i = patrol_pos.pick_random()
 		var dist = (i - self.global_position).length()
-		if dist > 10 and dist < 25:
+		if dist > 20 and dist < 40:
 			defined_pos = i
 	next_dest = defined_pos
-	stun_immunity = 18.0
+	stun_immunity = 6.0
 	await get_tree().create_timer(
-		9.0, false
+		3.0, false
 	).timeout
 	state = states.ROAMING
 	player_proximity.get_child(0).disabled = false
@@ -148,7 +148,7 @@ func _on_player_proximity_detection_body_entered(body: Node3D) -> void:
 			state = states.CHASING
 			all_sounds["alerted_scream"].play()
 			player_in_range = true
-		if state == states.ALERTED:
+		elif state == states.ALERTED:
 			state = states.CHASING
 			player_in_range = true
 
