@@ -90,6 +90,8 @@ func change_lantern_brightness(value: float) -> void:
 ## and your camera snaps to its head pos for a "jumpscare"
 func die() -> void:
 	Global.player_sounds.play("jumpscare")
+	for i in 5: 
+		gui.get_child(i + 2).hide()
 	var look_pos: Vector3
 	look_pos = ghost.global_position
 	look_pos.y += 1.0
