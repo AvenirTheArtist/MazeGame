@@ -19,6 +19,7 @@ var state = states.ROAMING
 var player_in_range = false
 var update_timer = 0.0
 var stun_immunity = 0.0
+var speed_mod = 1.0
 
 @onready var player_proximity = $player_proximity_detection
 @onready var los_ray = $los_detection
@@ -88,7 +89,7 @@ func _physics_process(delta: float) -> void:
 	direction.z = next_pos.z - global_position.z
 
 	var vel = direction.normalized() * speed_final
-	velocity = vel
+	velocity = vel * speed_mod
 
 	move_and_slide()
 
@@ -103,6 +104,9 @@ func update_roaming() -> Vector3:
 
 ## move to a collected bell
 func move_to_bell(pos) -> void:
+	## since it triggers on picking up a bell here's stat boosts
+	speed_mod += 0.07
+	
 	if state != states.CHASING and state != states.STUNNED:
 		alerted_pos = pos
 		state = states.ALERTED
