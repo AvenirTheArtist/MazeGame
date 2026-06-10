@@ -62,7 +62,7 @@ shape = SubResource("CapsuleShape3D_fp3om")
 debug_color = Color(0, 0.6, 1, 1)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1321660507]
-light_color = Color(1, 0.885, 0.7, 1)
+light_color = Color(0.6402422, 0.63252133, 0.57797307, 1)
 omni_range = 35.0
 omni_attenuation = 1.15
 
