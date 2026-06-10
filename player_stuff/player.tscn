@@ -23,8 +23,6 @@ radius = 0.3540039
 [node name="Player" type="CharacterBody3D" unique_id=2030803294 groups=["player"]]
 collision_mask = 3
 script = ExtResource("1_t7sdc")
-stamina_drain = 16.0
-stamina_recovery = 5.0
 
 [node name="head" type="Node3D" parent="." unique_id=1436492500]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4341842, 0)
