@@ -35,6 +35,9 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	get_tree().paused = false
 
+func _process(_delta: float) -> void:
+	sensitivity = Global.sensitivity
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		pause()

@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dg3cyu6s2fot5" path="res://sounds/fire/firecrackling.mp3" id="5_xyg0d"]
 [ext_resource type="AudioStream" uid="uid://e0m26g20bptg" path="res://sounds/fire/lantern_clink1.mp3" id="6_n46b5"]
 [ext_resource type="AudioStream" uid="uid://dtwxhs8jis0pa" path="res://sounds/fire/lantern_clink2.mp3" id="7_es3gr"]
-[ext_resource type="AudioStream" uid="uid://dr8t75mt6kprf" path="res://sounds/ghost/aggressive noise.mp3" id="8_es3gr"]
+[ext_resource type="AudioStream" uid="uid://4k3cm4xh1mqe" path="res://sounds/ghost/jumpscare.wav" id="8_es3gr"]
 
 [node name="PlayerSounds" type="AudioListener3D" unique_id=1554584262]
 script = ExtResource("1_74cct")

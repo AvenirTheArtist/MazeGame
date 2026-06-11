@@ -33,19 +33,52 @@ offset_left = -491.0
 offset_right = 492.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 7
+theme_override_constants/separation = 100
 
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1324012168]
+[node name="Audio" type="VBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1753398491]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="audio_text" type="Label" parent="CanvasLayer/VBoxContainer/Audio" unique_id=1324012168]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Audio:"
 horizontal_alignment = 1
 
-[node name="volume" type="HSlider" parent="CanvasLayer/VBoxContainer" unique_id=1046219607]
+[node name="audio_slider" type="HSlider" parent="CanvasLayer/VBoxContainer/Audio" unique_id=1046219607]
 layout_mode = 2
 max_value = 1.0
 step = 0.001
 value = 1.0
+
+[node name="Sensitivity" type="VBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=460622456]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="sens_text" type="Label" parent="CanvasLayer/VBoxContainer/Sensitivity" unique_id=327715216]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Sensitivity"
+horizontal_alignment = 1
+
+[node name="sens_slider" type="HSlider" parent="CanvasLayer/VBoxContainer/Sensitivity" unique_id=1866724955]
+layout_mode = 2
+min_value = 0.01
+max_value = 0.7
+step = 0.001
+value = 0.09999999999999999
+
+[node name="resolution" type="VBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1194984179]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/VBoxContainer/resolution" unique_id=789330817]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "1920x1090"
+popup/item_0/id = 0
+popup/item_1/text = "1792x1008"
+popup/item_1/id = 1
+popup/item_2/id = 2
 
 [node name="back" type="Button" parent="CanvasLayer" unique_id=854875505]
 anchors_preset = 12
