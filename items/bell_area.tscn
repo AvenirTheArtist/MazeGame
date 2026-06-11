@@ -6,14 +6,14 @@
 [ext_resource type="AudioStream" uid="uid://dieqfw4mv4kyp" path="res://sounds/evilbell.mp3" id="3_wh7xs"]
 [ext_resource type="AudioStream" uid="uid://dcay1xbvrdkmj" path="res://sounds/ambience1.mp3" id="5_k3urw"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wh7xs"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_k3urw"]
 resource_local_to_scene = true
 
 [node name="bell_area" unique_id=259076975 instance=ExtResource("1_iwbc6")]
 script = ExtResource("2_jtgcf")
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=399693202]
-shape = SubResource("BoxShape3D_wh7xs")
+shape = SubResource("BoxShape3D_k3urw")
 
 [node name="bellring" type="AudioStreamPlayer3D" parent="." index="1" unique_id=2068495577]
 stream = ExtResource("3_wh7xs")

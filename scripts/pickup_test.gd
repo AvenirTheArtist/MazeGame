@@ -5,7 +5,7 @@ var activated = false
 func _ready() -> void:
 	get_parent().number_of_bells += 1
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not activated:
 		if !$ambience.playing:
 			$ambience.play()
