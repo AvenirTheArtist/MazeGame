@@ -35,15 +35,23 @@ offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="start" type="Button" parent="VBoxContainer" unique_id=1631777938]
+[node name="Enter" type="Button" parent="VBoxContainer" unique_id=1631777938]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "enter"
+text = "Enter
+"
 
-[node name="leave" type="Button" parent="VBoxContainer" unique_id=134979926]
+[node name="Options" type="Button" parent="VBoxContainer" unique_id=723149612]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "leave"
+text = "Options
+"
+
+[node name="Quit" type="Button" parent="VBoxContainer" unique_id=134979926]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Quit
+"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=651668486]
 layer = -2
@@ -80,5 +88,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[connection signal="pressed" from="VBoxContainer/start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/leave" to="." method="_on_leave_pressed"]
+[connection signal="pressed" from="VBoxContainer/Enter" to="." method="_on_enter_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

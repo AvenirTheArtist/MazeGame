@@ -35,6 +35,9 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		pause()
+	
 	light_lantern.light_energy = clampf(light_lantern.light_energy, 1, 99)
 	
 	## LOS detection for lantern stun
@@ -114,3 +117,9 @@ func _on_stun_area_body_entered(body: Node3D) -> void:
 func _on_stun_area_body_exited(body: Node3D) -> void:
 	if body.is_in_group("ghost"):
 		ghost_in_range = false
+
+func pause():
+
+	var new_pausemenu = Global.PAUSE_MENU.instantiate()
+	get_tree().current_scene.add_child(new_pausemenu)
+	new_pausemenu.pause()
