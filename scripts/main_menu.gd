@@ -1,7 +1,5 @@
 extends Control
 
-@export var level: PackedScene
-@export var options_menu: PackedScene
 @onready var buttons = {
 	"enter": $VBoxContainer/Enter,
 	"options": $VBoxContainer/Options,
@@ -11,13 +9,17 @@ extends Control
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().paused = false
+
+func _process(_delta: float) -> void:
+	if !$ambience.playing:
+		$ambience.play()
 
 
 func _on_enter_pressed() -> void:
-	get_tree().change_scene_to_packed(level)
+	get_tree().change_scene_to_packed(Global.MAZE_LEVEL)
 
 func _on_options_pressed() -> void:
-	pass # Replace with function body.
-
+	get_tree().current_scene.add_child(Global.OPTIONS_MENU.instantiate())
 func _on_quit_pressed() -> void:
 	get_tree().quit()

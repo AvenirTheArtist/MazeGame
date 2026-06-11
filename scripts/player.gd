@@ -33,6 +33,7 @@ var matchstick_amount: int = 2
 func _ready() -> void:
 	Global.player = self
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	get_tree().paused = false
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
