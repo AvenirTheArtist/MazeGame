@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bdqok8eh5tmtn" path="res://scripts/player.gd" id="1_t7sdc"]
 [ext_resource type="PackedScene" uid="uid://2ywcafmf5l5v" path="res://player_stuff/gui.tscn" id="2_fp3om"]
 [ext_resource type="Shader" uid="uid://dch6x6e0sxac8" path="res://shaders/pixelated_2.gdshader" id="2_gcccv"]
+[ext_resource type="PackedScene" uid="uid://blqv5ffmuucjp" path="res://player_stuff/PlayerSounds.tscn" id="4_43wku"]
 
 [sub_resource type="Compositor" id="Compositor_43wku"]
 
@@ -12,6 +13,9 @@
 render_priority = 0
 shader = ExtResource("2_gcccv")
 shader_parameter/pixel_size = 8.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gcccv"]
+size = Vector3(4, 2, 5)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3om"]
 radius = 0.3540039
@@ -39,11 +43,30 @@ collision_mask = 2
 
 [node name="gui" parent="head" unique_id=844792369 instance=ExtResource("2_fp3om")]
 
+[node name="stun_area" type="Area3D" parent="head" unique_id=388403551]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="head/stun_area" unique_id=309231877]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.85)
+shape = SubResource("BoxShape3D_gcccv")
+disabled = true
+debug_color = Color(0, 1, 0.049999952, 1)
+
+[node name="los_detection_ray" type="RayCast3D" parent="head/stun_area" unique_id=1550685636]
+target_position = Vector3(0, 0, -6)
+debug_shape_custom_color = Color(0.17, 0.68, 0, 0.37254903)
+
+[node name="AudioListener3D" type="AudioListener3D" parent="head" unique_id=258039527]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1510286024]
 shape = SubResource("CapsuleShape3D_fp3om")
 debug_color = Color(0, 0.6, 1, 1)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1321660507]
-light_color = Color(0.95, 0.534375, 0.2375, 1)
+light_color = Color(0.6402422, 0.63252133, 0.57797307, 1)
 omni_range = 35.0
 omni_attenuation = 1.15
+
+[node name="PlayerSounds" parent="." unique_id=1554584262 instance=ExtResource("4_43wku")]
+
+[connection signal="body_entered" from="head/stun_area" to="." method="_on_stun_area_body_entered"]
+[connection signal="body_exited" from="head/stun_area" to="." method="_on_stun_area_body_exited"]

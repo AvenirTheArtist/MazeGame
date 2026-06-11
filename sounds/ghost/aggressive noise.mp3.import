@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dr8t75mt6kprf"
+path="res://.godot/imported/aggressive noise.mp3-74bfd91d1cab761ca627c02a772d555e.mp3str"
+
+[deps]
+
+source_file="res://sounds/ghost/aggressive noise.mp3"
+dest_files=["res://.godot/imported/aggressive noise.mp3-74bfd91d1cab761ca627c02a772d555e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,14 +2,29 @@
 
 [ext_resource type="PackedScene" uid="uid://dw5g1fa003au8" path="res://items/pickup.tscn" id="1_iwbc6"]
 [ext_resource type="Script" uid="uid://dq72686q4tfv5" path="res://scripts/pickup_test.gd" id="2_jtgcf"]
+[ext_resource type="PackedScene" uid="uid://cxp4b8r7tp0ml" path="res://models/bell.glb" id="3_jtgcf"]
+[ext_resource type="AudioStream" uid="uid://dieqfw4mv4kyp" path="res://sounds/evilbell.mp3" id="3_wh7xs"]
+[ext_resource type="AudioStream" uid="uid://dcay1xbvrdkmj" path="res://sounds/ambience1.mp3" id="5_k3urw"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wh7xs"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_k3urw"]
 resource_local_to_scene = true
 
 [node name="bell_area" unique_id=259076975 instance=ExtResource("1_iwbc6")]
 script = ExtResource("2_jtgcf")
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=399693202]
-shape = SubResource("BoxShape3D_wh7xs")
+shape = SubResource("BoxShape3D_k3urw")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="1" unique_id=2068495577]
+[node name="bellring" type="AudioStreamPlayer3D" parent="." index="1" unique_id=2068495577]
+stream = ExtResource("3_wh7xs")
+
+[node name="bell2" parent="." index="2" unique_id=1222894706 instance=ExtResource("3_jtgcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="ambience" type="AudioStreamPlayer3D" parent="." index="3" unique_id=934320407]
+stream = ExtResource("5_k3urw")
+unit_size = 6.93
+max_db = 5.0
+autoplay = true
+max_distance = 10.0
+panning_strength = 2.02

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c0a40y8c2oaxq"]
+
+[ext_resource type="Texture2D" uid="uid://cljoj8tkr5g8q" path="res://images/matchstick.png" id="1_y1hs8"]
+
+[node name="match_hud_icon" type="Control" unique_id=1050240310]
+custom_minimum_size = Vector2(60, 80)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1755240204]
+position = Vector2(43.25, 56.350006)
+scale = Vector2(0.14615385, 0.14615387)
+texture = ExtResource("1_y1hs8")
+region_enabled = true
+region_rect = Rect2(249, 148.29, 585.865, 767.215)

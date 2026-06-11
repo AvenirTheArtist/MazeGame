@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dultbd2gt3mx4"
-path.s3tc="res://.godot/imported/walltexture.png-8c8e2be415519776f980707ebd0cfa0e.s3tc.ctex"
+uid="uid://pqh76ru26q4i"
+path="res://.godot/imported/ghost_cry.png-35772ed8a0e19c265088a06fd9c7e11c.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/walltexture.png"
-dest_files=["res://.godot/imported/walltexture.png-8c8e2be415519776f980707ebd0cfa0e.s3tc.ctex"]
+source_file="res://images/ghost_cry.png"
+dest_files=["res://.godot/imported/ghost_cry.png-35772ed8a0e19c265088a06fd9c7e11c.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

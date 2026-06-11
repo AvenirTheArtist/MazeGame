@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://dtckck82aj13t"]
 
 [ext_resource type="Script" uid="uid://b2okvfvocwsce" path="res://scripts/ghost.gd" id="1_4a7c8"]
+[ext_resource type="AudioStream" uid="uid://bklgrg54i47lq" path="res://sounds/ghost/proximitysound.mp3" id="2_rbinr"]
+[ext_resource type="Texture2D" uid="uid://deoxjaybtyc1w" path="res://images/ghost.png" id="2_vqlh6"]
+[ext_resource type="AudioStream" uid="uid://cfu7jbs8vhuki" path="res://sounds/ghost/scream.wav" id="3_8bw8y"]
+[ext_resource type="Texture2D" uid="uid://pqh76ru26q4i" path="res://images/ghost_cry.png" id="3_oca1r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rbinr"]
 radius = 0.01
@@ -14,20 +18,25 @@ radius = 0.3
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4a7c8"]
 resource_local_to_scene = true
-radius = 8.0
+radius = 12.10791
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4a7c8"]
 radius = 0.3
 
-[node name="ghost" type="CharacterBody3D" unique_id=1867606666]
+[node name="ghost" type="CharacterBody3D" unique_id=1867606666 groups=["ghost"]]
 script = ExtResource("1_4a7c8")
-speed = 5.3
+sprites = Array[Texture2D]([ExtResource("2_vqlh6"), ExtResource("3_oca1r")])
+roam_speed = 5.3
+alert_speed = 5.6
+chase_speed = 5.3
+stun_speed = 9.0
 patrol_pos = Array[Vector3]([Vector3(1, 1, 4), Vector3(-2, 1, 6), Vector3(-8, 1, 2), Vector3(0, 1, -4)])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1286315396]
 shape = SubResource("CapsuleShape3D_rbinr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=319643354]
+visible = false
 mesh = SubResource("CapsuleMesh_rbinr")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1292457759]
@@ -46,7 +55,36 @@ shape = SubResource("CapsuleShape3D_4a7c8")
 debug_color = Color(0, 1, 0.9166665, 1)
 
 [node name="ghost_sprite" type="Sprite3D" parent="." unique_id=1061962938]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 billboard = 2
+texture = ExtResource("2_vqlh6")
+
+[node name="sound_player" type="Node3D" parent="." unique_id=114506489]
+
+[node name="proximity_sound" type="AudioStreamPlayer3D" parent="sound_player" unique_id=72392308]
+stream = ExtResource("2_rbinr")
+volume_db = 1.0
+unit_size = 66.67
+max_db = -1.0
+autoplay = true
+max_distance = 12.0
+panning_strength = 2.0
+
+[node name="alerted_scream" type="AudioStreamPlayer3D" parent="sound_player" unique_id=173091261]
+stream = ExtResource("3_8bw8y")
+volume_db = 2.0
+max_db = 5.0
+pitch_scale = 1.2
+panning_strength = 1.25
+
+[node name="stunned" type="AudioStreamPlayer3D" parent="sound_player" unique_id=1009304791]
+stream = ExtResource("3_8bw8y")
+attenuation_model = 2
+max_db = 5.0
+pitch_scale = 0.9
+
+[node name="los_detection" type="RayCast3D" parent="." unique_id=370817529]
+target_position = Vector3(0, 0, -12)
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="body_entered" from="player_proximity_detection" to="." method="_on_player_proximity_detection_body_entered"]

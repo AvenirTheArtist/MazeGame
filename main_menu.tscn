@@ -1,5 +1,16 @@
 [gd_scene format=3 uid="uid://cmdj4mgmded3t"]
 
+[ext_resource type="Script" uid="uid://cmjk4i4eb3s6g" path="res://scripts/main_menu.gd" id="1_7vrkn"]
+[ext_resource type="Texture2D" uid="uid://bpw64b14gfdv" path="res://images/menu.png" id="3_fu7sn"]
+[ext_resource type="AudioStream" uid="uid://dcay1xbvrdkmj" path="res://sounds/ambience1.mp3" id="4_glbon"]
+[ext_resource type="Shader" uid="uid://eqx10loadpa1" path="res://shaders/vignette.gdshader" id="4_jix8l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glbon"]
+shader = ExtResource("4_jix8l")
+shader_parameter/alpha = 0.5
+shader_parameter/inner_radius = 0.45
+shader_parameter/outer_radius = 1.1
+
 [node name="main_menu" type="Control" unique_id=586736589]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7vrkn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1687815714]
 layout_mode = 1
@@ -15,19 +27,71 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -129.0
-offset_top = -77.0
-offset_right = 129.0
-offset_bottom = 77.0
+offset_left = -147.0
+offset_top = 6.0
+offset_right = 111.0
+offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="start" type="Button" parent="VBoxContainer" unique_id=1631777938]
+[node name="Enter" type="Button" parent="VBoxContainer" unique_id=1631777938]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "start game"
+text = "Enter
+"
 
-[node name="leave" type="Button" parent="VBoxContainer" unique_id=134979926]
+[node name="Options" type="Button" parent="VBoxContainer" unique_id=723149612]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "leave"
+text = "Options
+"
+
+[node name="Quit" type="Button" parent="VBoxContainer" unique_id=134979926]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Quit
+"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=651668486]
+layer = -2
+
+[node name="menuimage" type="TextureRect" parent="CanvasLayer" unique_id=541341129]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_fu7sn")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1169378660]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -210.0
+offset_top = 110.0
+offset_right = 175.0
+offset_bottom = 383.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 200
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="vignette" type="ColorRect" parent="CanvasLayer" unique_id=1856517968]
+material = SubResource("ShaderMaterial_glbon")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ambience" type="AudioStreamPlayer2D" parent="." unique_id=450184392]
+stream = ExtResource("4_glbon")
+volume_db = 19.0
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/Enter" to="." method="_on_enter_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

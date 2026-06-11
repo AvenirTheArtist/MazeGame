@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://cwporusy18ghv"]
+
+[ext_resource type="Script" uid="uid://c44rfb1eihumf" path="res://scripts/options_menu.gd" id="1_lbr8e"]
+
+[node name="options_menu" type="Control" unique_id=282841177]
+process_mode = 3
+z_index = 6
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lbr8e")
+bus_name = "Master"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=452851732]
+layer = 4
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1274823817]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1604219545]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -491.0
+offset_right = 492.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="Audio" type="VBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1753398491]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="audio_text" type="Label" parent="CanvasLayer/VBoxContainer/Audio" unique_id=1324012168]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Audio:"
+horizontal_alignment = 1
+
+[node name="audio_slider" type="HSlider" parent="CanvasLayer/VBoxContainer/Audio" unique_id=1046219607]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="Sensitivity" type="VBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=460622456]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="sens_text" type="Label" parent="CanvasLayer/VBoxContainer/Sensitivity" unique_id=327715216]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Sensitivity"
+horizontal_alignment = 1
+
+[node name="sens_slider" type="HSlider" parent="CanvasLayer/VBoxContainer/Sensitivity" unique_id=1866724955]
+layout_mode = 2
+min_value = 0.01
+max_value = 0.7
+step = 0.001
+value = 0.09999999999999999
+
+[node name="resolution" type="VBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1194984179]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/VBoxContainer/resolution" unique_id=789330817]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+selected = 5
+item_count = 8
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1792x1008"
+popup/item_1/id = 1
+popup/item_2/text = "1600x900"
+popup/item_2/id = 2
+popup/item_3/text = "1536x864"
+popup/item_3/id = 3
+popup/item_4/text = "1408x792"
+popup/item_4/id = 4
+popup/item_5/text = "1280x720"
+popup/item_5/id = 5
+popup/item_6/text = "1152x 648"
+popup/item_6/id = 6
+popup/item_7/text = "1024x576"
+popup/item_7/id = 7
+
+[node name="checkboxes" type="VBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1854743470]
+layout_mode = 2
+
+[node name="fullscreen" type="CheckBox" parent="CanvasLayer/VBoxContainer/checkboxes" unique_id=276854890]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+button_pressed = true
+text = ": Fullscreen
+"
+
+[node name="back" type="Button" parent="CanvasLayer" unique_id=854875505]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -79.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "<- BACK
+"
+
+[connection signal="item_selected" from="CanvasLayer/VBoxContainer/resolution/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="toggled" from="CanvasLayer/VBoxContainer/checkboxes/fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="CanvasLayer/back" to="." method="_on_back_pressed"]

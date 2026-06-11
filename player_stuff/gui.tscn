@@ -5,7 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://cn147efb2m4d3" path="res://images/firesprite.png" id="3_a72ct"]
 [ext_resource type="Script" uid="uid://dud7j7dedy5td" path="res://scripts/matchstickgui.gd" id="3_fldqh"]
 [ext_resource type="Texture2D" uid="uid://dslrupb447ixa" path="res://images/burntmatchstick.png" id="4_6uk0c"]
+[ext_resource type="PackedScene" uid="uid://c0a40y8c2oaxq" path="res://player_stuff/match_hud_icon.tscn" id="6_5gbqd"]
+[ext_resource type="Texture2D" uid="uid://cmx6wfby2ryjh" path="res://images/litlantern.png" id="6_fffk0"]
 [ext_resource type="Shader" uid="uid://c7w2wwk2il3nn" path="res://shaders/gui_pixelated.gdshader" id="6_y0ual"]
+[ext_resource type="Script" uid="uid://m8pppaw2287k" path="res://scripts/lanterngui.gd" id="7_82v4m"]
+[ext_resource type="Texture2D" uid="uid://c0cxmn34fsbek" path="res://images/unlitlantern.png" id="8_cw60c"]
 
 [sub_resource type="Animation" id="Animation_y0ual"]
 length = 0.001
@@ -34,13 +38,81 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(0.17075552, 1),
 "update": 0,
-"values": [Vector2(4, 100), Vector2(4, -300)]
+"values": [Vector2(100, 100), Vector2(170, -235)]
+}
+
+[sub_resource type="Animation" id="Animation_fffk0"]
+resource_name = "matchgoingdown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("matchstickgui:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.17, 1),
+"update": 0,
+"values": [Vector2(170, -235), Vector2(100, 100)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y0ual"]
 _data = {
 &"RESET": SubResource("Animation_y0ual"),
-&"matchcomingup": SubResource("Animation_6uk0c")
+&"matchcomingup": SubResource("Animation_6uk0c"),
+&"matchgoingdown": SubResource("Animation_fffk0")
+}
+
+[sub_resource type="Animation" id="Animation_rmf1m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bottomright/lantern:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.17),
+"update": 0,
+"values": [Vector2(-442, -483.00006)]
+}
+
+[sub_resource type="Animation" id="Animation_84dgl"]
+resource_name = "lanterngoingdown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bottomright/lantern:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.17, 0.17),
+"update": 0,
+"values": [Vector2(-442, -483.00006), Vector2(-202.00002, 56.999878)]
+}
+
+[sub_resource type="Animation" id="Animation_tusqa"]
+resource_name = "lanterngoingup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bottomright/lantern:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.17, 0.17),
+"update": 0,
+"values": [Vector2(-202.00002, 56.999878), Vector2(-442, -483.00006)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ooum0"]
+_data = {
+&"RESET": SubResource("Animation_rmf1m"),
+&"lanterngoingdown": SubResource("Animation_84dgl"),
+&"lanterngoingup": SubResource("Animation_tusqa")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a72ct"]
@@ -98,14 +170,14 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fffk0"]
 shader = ExtResource("6_y0ual")
-shader_parameter/resolution_x = 320
-shader_parameter/resolution_y = 240
+shader_parameter/resolution_x = 640
+shader_parameter/resolution_y = 360
 shader_parameter/color_bit_depth = 8
-shader_parameter/dither_strength = 0.01
+shader_parameter/dither_strength = 0.0
 shader_parameter/jitter_amount = 0.001
 shader_parameter/jitter_speed = 1.2
-shader_parameter/jitter_frequency = 180.0
-shader_parameter/chromatic_aberration_strength = 0.0050000002375
+shader_parameter/jitter_frequency = 200.0
+shader_parameter/chromatic_aberration_strength = 0.0
 shader_parameter/vignette_strength = 0.8
 shader_parameter/vignette_radius = 0.9
 
@@ -119,29 +191,25 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_s4ehn")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1664297915]
+[node name="matchstickanims" type="AnimationPlayer" parent="." unique_id=1664297915]
 root_node = NodePath("../bottomleft")
 libraries/ = SubResource("AnimationLibrary_y0ual")
 
-[node name="topleft" type="Control" parent="." unique_id=1532966660]
+[node name="lanternanim" type="AnimationPlayer" parent="." unique_id=1219566592]
+libraries/ = SubResource("AnimationLibrary_ooum0")
+
+[node name="topleft" type="Control" parent="." unique_id=207410149]
 layout_mode = 1
 anchors_preset = 0
 
-[node name="hp" type="ProgressBar" parent="topleft" unique_id=1344728334]
-visible = false
-modulate = Color(1, 0.23921569, 0.23921569, 1)
+[node name="matches_in_reserve" type="HBoxContainer" parent="topleft" unique_id=1817823158]
 layout_mode = 0
-offset_right = 450.0
-offset_bottom = 30.0
+offset_right = 60.0
+offset_bottom = 80.0
+scale = Vector2(1.3045032, 1.3045032)
 
-[node name="stamina" type="ProgressBar" parent="topleft" unique_id=1126781877]
-modulate = Color(0.23921569, 1, 0.23921569, 1)
-layout_mode = 0
-offset_left = 12.0
-offset_top = 16.0
-offset_right = 462.0
-offset_bottom = 46.0
-show_percentage = false
+[node name="match_hud_icon" parent="topleft/matches_in_reserve" unique_id=1050240310 instance=ExtResource("6_5gbqd")]
+layout_mode = 2
 
 [node name="topright" type="Control" parent="." unique_id=56690247]
 layout_mode = 1
@@ -153,12 +221,15 @@ offset_bottom = 40.0
 grow_horizontal = 0
 
 [node name="bells_collected" type="Label" parent="topright" unique_id=533205816]
-layout_mode = 0
-offset_left = -267.0
-offset_top = 24.0
-offset_right = 9.0
-offset_bottom = 69.0
-theme_override_font_sizes/font_size = 32
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -439.0
+offset_right = -20.0
+offset_bottom = 88.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 64
 text = "0/0 bells rung"
 horizontal_alignment = 2
 
@@ -177,10 +248,11 @@ offset_left = 4.0
 offset_top = -300.0
 offset_right = 1028.0
 offset_bottom = 724.0
-scale = Vector2(0.4273974, 0.4273974)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_6uk0c")
 script = ExtResource("3_fldqh")
 matchstick_textures = Array[Texture2D]([ExtResource("2_l5pwb"), ExtResource("4_6uk0c")])
+matchstick_health = 10.0
 
 [node name="litpos" type="Control" parent="bottomleft/matchstickgui" unique_id=228410676]
 anchors_preset = 0
@@ -200,21 +272,88 @@ offset_bottom = 561.7627
 z_index = -1
 scale = Vector2(0.8139821, 0.8139821)
 sprite_frames = SubResource("SpriteFrames_6uk0c")
-animation = &"empty"
+animation = &"enterfire"
 autoplay = "empty"
 offset = Vector2(0, -200)
 
 [node name="burnouttimer" type="Timer" parent="bottomleft/matchstickgui" unique_id=1314475471]
+wait_time = 10.0
+one_shot = true
+
+[node name="bottomright" type="Control" parent="." unique_id=1517915056]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="lantern" type="TextureRect" parent="bottomright" unique_id=1406835986]
+layout_mode = 1
+offset_left = -442.0
+offset_top = -483.00006
+offset_right = 582.0
+offset_bottom = 540.99994
+scale = Vector2(0.47235283, 0.47235283)
+texture = ExtResource("8_cw60c")
+script = ExtResource("7_82v4m")
+lantern_textutes = Array[Texture2D]([ExtResource("8_cw60c"), ExtResource("6_fffk0")])
+
+[node name="fireanim" type="AnimatedSprite2D" parent="bottomright/lantern" unique_id=2112771734]
+z_index = -1
+position = Vector2(305.85583, 834.1522)
+scale = Vector2(0.47176763, 0.47176763)
+sprite_frames = SubResource("SpriteFrames_6uk0c")
+animation = &"animatedfire"
+autoplay = "empty"
+offset = Vector2(0, -200)
+
+[node name="burnouttimer" type="Timer" parent="bottomright/lantern" unique_id=1281584297]
 wait_time = 5.0
 one_shot = true
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=885447942]
-material = SubResource("ShaderMaterial_fffk0")
+[node name="bottommiddle" type="Control" parent="." unique_id=406630806]
 layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="stamina" type="ProgressBar" parent="bottommiddle" unique_id=1126781877]
+modulate = Color(0.23921569, 1, 0.23921569, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -350.99997
+offset_top = -64.0
+offset_right = 99.00003
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.3288503, 1.3288503)
+show_percentage = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=24843649]
+layer = 2
+
+[node name="glitchshader" type="ColorRect" parent="CanvasLayer" unique_id=885447942]
+material = SubResource("ShaderMaterial_fffk0")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[connection signal="animation_finished" from="bottomleft/matchstickgui/fireanim" to="bottomleft/matchstickgui" method="_on_fireanim_animation_finished"]
 [connection signal="timeout" from="bottomleft/matchstickgui/burnouttimer" to="bottomleft/matchstickgui" method="_on_burnouttimer_timeout"]
+[connection signal="timeout" from="bottomright/lantern/burnouttimer" to="bottomright/lantern" method="_on_burnouttimer_timeout"]
