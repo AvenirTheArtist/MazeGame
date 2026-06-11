@@ -119,7 +119,5 @@ func _on_stun_area_body_exited(body: Node3D) -> void:
 		ghost_in_range = false
 
 func pause():
-
 	var new_pausemenu = Global.PAUSE_MENU.instantiate()
 	get_tree().current_scene.add_child(new_pausemenu)
-	new_pausemenu.pause()

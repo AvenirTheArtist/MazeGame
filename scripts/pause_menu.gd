@@ -2,21 +2,24 @@ extends Control
 
 
 func resume():
+	queue_free()
 	get_tree().paused = false
 	print("resumed")
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 
 func pause():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().paused = true
 
 func restart():
-	get_tree().change_scene_to_packed(Global.MAZE_LEVEL)
+	get_tree().change_scene_to_file("res://maps/maze_level.tscn")
 
 func options():
 	get_tree().current_scene.add_child(Global.OPTIONS_MENU.instantiate())
 
 func menu():
-	get_tree().change_scene_to_packed(Global.MAIN_MENU)
+	get_tree().change_scene_to_file("res://main_menu.tscn")
 	
 func testesc():
 	if Input.is_action_just_pressed("pause"):
@@ -25,9 +28,8 @@ func testesc():
 		else:
 			pause()
 
-func _process(delta: float) -> void:
-	pass
-	#testesc()
+func _process(_delta: float) -> void:
+	testesc()
 
 func _on_resume_pressed() -> void:
 	resume()
