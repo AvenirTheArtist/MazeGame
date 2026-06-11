@@ -20,6 +20,7 @@ var death_animation = false
 var lantern_empowered = false
 var lantern_time: float = 20
 var ghost_in_range = false
+var distance_from_ghost: float
 
 var matchstick_amount: int = 2
 
@@ -37,6 +38,15 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	sensitivity = Global.sensitivity
+	
+	#GLITCH SHADER
+	distance_from_ghost = global_position.distance_to(Global.enemy.global_position)
+	var jitshader_value: float =  0.05 - distance_from_ghost/100
+	jitshader_value = clampf(jitshader_value, 0.001, 0.05)
+	
+	
+	gui.glitchshader.material.set_shader_parameter("chromatic_aberration_strength", jitshader_value)
+	gui.glitchshader.material.set_shader_parameter("jitter_amount", jitshader_value)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):

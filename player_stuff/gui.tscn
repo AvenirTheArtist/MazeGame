@@ -346,7 +346,7 @@ show_percentage = false
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=24843649]
 layer = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=885447942]
+[node name="glitchshader" type="ColorRect" parent="CanvasLayer" unique_id=885447942]
 material = SubResource("ShaderMaterial_fffk0")
 anchors_preset = 15
 anchor_right = 1.0

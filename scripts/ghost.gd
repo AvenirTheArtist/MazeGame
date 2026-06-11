@@ -7,6 +7,9 @@ enum states {
 	CHASING,
 	STUNNED
 }
+
+@export var sprites: Array[Texture2D] = [null, null]
+
 @export var roam_speed: float
 @export var alert_speed: float
 @export var chase_speed: float
@@ -20,6 +23,7 @@ var player_in_range = false
 var update_timer = 0.0
 var stun_immunity = 0.0
 
+@onready var ghost_sprite: Sprite3D = $ghost_sprite
 @onready var player_proximity = $player_proximity_detection
 @onready var los_ray = $los_detection
 @onready var nav = $NavigationAgent3D
@@ -66,10 +70,13 @@ func _physics_process(delta: float) -> void:
 	#region /// updating navigation
 	match state:
 		states.ROAMING:
+			ghost_sprite.texture = sprites[0]
 			speed_final = roam_speed
 		states.ALERTED:
+			ghost_sprite.texture = sprites[0]
 			speed_final = alert_speed
 		states.CHASING:
+			ghost_sprite.texture = sprites[0]
 			speed_final = chase_speed
 			update_timer -= delta
 			if update_timer <= 0 and state == states.CHASING:
@@ -78,6 +85,7 @@ func _physics_process(delta: float) -> void:
 				randomize()
 				update_timer += 0.2 + rand
 		states.STUNNED:
+			ghost_sprite.texture = sprites[1]
 			speed_final = stun_speed
 	#endregion
 

@@ -15,21 +15,20 @@ extends Control
 @onready var bottomleft = {
 	"matchstick": $bottomleft/matchstickgui,
 }
-@onready var shader = $CanvasLayer/ColorRect
-var shader_settings = []
+@onready var glitchshader: ColorRect = $CanvasLayer/glitchshader
+
 
 func _ready() -> void:
 	change_matches_count(2)
 
 func _process(_delta: float) -> void:
 	change_matches_count(player.matchstick_amount)
-	player.ghost
 	bottommiddle.stamina.value = player.stamina
 	topright.bells.text = str(map.bells_collected) + "/" + str(map.number_of_bells) + " bells rung"
 	
 
 func change_matches_count(number: int) -> void:
-	
+
 	var node = topleft.matches_in_reserve
 	for i in node.get_children():
 		i.queue_free()

@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b2okvfvocwsce" path="res://scripts/ghost.gd" id="1_4a7c8"]
 [ext_resource type="AudioStream" uid="uid://bklgrg54i47lq" path="res://sounds/ghost/proximitysound.mp3" id="2_rbinr"]
+[ext_resource type="Texture2D" uid="uid://deoxjaybtyc1w" path="res://images/ghost.png" id="2_vqlh6"]
 [ext_resource type="AudioStream" uid="uid://cfu7jbs8vhuki" path="res://sounds/ghost/scream.wav" id="3_8bw8y"]
+[ext_resource type="Texture2D" uid="uid://pqh76ru26q4i" path="res://images/ghost_cry.png" id="3_oca1r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rbinr"]
 radius = 0.01
@@ -23,6 +25,7 @@ radius = 0.3
 
 [node name="ghost" type="CharacterBody3D" unique_id=1867606666 groups=["ghost"]]
 script = ExtResource("1_4a7c8")
+sprites = Array[Texture2D]([ExtResource("2_vqlh6"), ExtResource("3_oca1r")])
 roam_speed = 5.3
 alert_speed = 5.6
 chase_speed = 5.3
@@ -33,6 +36,7 @@ patrol_pos = Array[Vector3]([Vector3(1, 1, 4), Vector3(-2, 1, 6), Vector3(-8, 1,
 shape = SubResource("CapsuleShape3D_rbinr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=319643354]
+visible = false
 mesh = SubResource("CapsuleMesh_rbinr")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1292457759]
@@ -51,7 +55,9 @@ shape = SubResource("CapsuleShape3D_4a7c8")
 debug_color = Color(0, 1, 0.9166665, 1)
 
 [node name="ghost_sprite" type="Sprite3D" parent="." unique_id=1061962938]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 billboard = 2
+texture = ExtResource("2_vqlh6")
 
 [node name="sound_player" type="Node3D" parent="." unique_id=114506489]
 

@@ -4,7 +4,6 @@ extends Control
 func resume():
 	queue_free()
 	get_tree().paused = false
-	print("resumed")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
