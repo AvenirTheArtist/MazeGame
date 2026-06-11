@@ -26,5 +26,5 @@ stream = ExtResource("5_k3urw")
 unit_size = 6.93
 max_db = 5.0
 autoplay = true
-max_distance = 12.0
+max_distance = 8.0
 panning_strength = 2.02
