@@ -176,7 +176,6 @@ orientation = 1
 
 [node name="maze_level" type="Node3D" unique_id=738270148]
 script = ExtResource("1_7dgl2")
-number_of_bells = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1706652146]
 environment = SubResource("Environment_17l5i")

@@ -41,7 +41,7 @@ func _process(_delta: float) -> void:
 	
 	#GLITCH SHADER
 	distance_from_ghost = global_position.distance_to(Global.enemy.global_position)
-	var jitshader_value: float =  0.05 - distance_from_ghost/100
+	var jitshader_value: float =  0.05 - distance_from_ghost/300
 	jitshader_value = clampf(jitshader_value, 0.001, 0.05)
 	
 	
