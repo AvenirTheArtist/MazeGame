@@ -15,7 +15,7 @@ shader = ExtResource("2_gcccv")
 shader_parameter/pixel_size = 8.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gcccv"]
-size = Vector3(4, 2, 5)
+size = Vector3(5.8425293, 2, 5.234497)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3om"]
 radius = 0.3540039
@@ -46,7 +46,7 @@ collision_mask = 2
 [node name="stun_area" type="Area3D" parent="head" unique_id=388403551]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="head/stun_area" unique_id=309231877]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.85)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.733)
 shape = SubResource("BoxShape3D_gcccv")
 disabled = true
 debug_color = Color(0, 1, 0.049999952, 1)

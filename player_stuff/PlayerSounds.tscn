@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://e0m26g20bptg" path="res://sounds/fire/lantern_clink1.mp3" id="6_n46b5"]
 [ext_resource type="AudioStream" uid="uid://dtwxhs8jis0pa" path="res://sounds/fire/lantern_clink2.mp3" id="7_es3gr"]
 [ext_resource type="AudioStream" uid="uid://4k3cm4xh1mqe" path="res://sounds/ghost/jumpscare.wav" id="8_es3gr"]
+[ext_resource type="AudioStream" uid="uid://coiy26jqopyco" path="res://sounds/footstep.wav" id="9_ru1ip"]
 
 [node name="PlayerSounds" type="AudioListener3D" unique_id=1554584262]
 script = ExtResource("1_74cct")
@@ -44,3 +45,8 @@ stream = ExtResource("8_es3gr")
 volume_db = 24.0
 max_db = 6.0
 pitch_scale = 1.2
+
+[node name="footstep" type="AudioStreamPlayer3D" parent="." unique_id=1511208511]
+stream = ExtResource("9_ru1ip")
+max_db = -5.0
+pitch_scale = 0.2

@@ -22,6 +22,10 @@ var lantern_time: float = 20
 var ghost_in_range = false
 var distance_from_ghost: float
 
+var BOB_FREQ := 2.0
+var BOB_AMP := 0.04
+var t_bob := 0.0
+
 var matchstick_amount: int = 2
 
 @onready var ghost = get_tree().get_first_node_in_group("ghost")
@@ -51,6 +55,9 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		pause()
+	
+	t_bob += velocity.length() * delta * float(is_on_floor())
+	head.transform.origin = _headbob(t_bob)
 	
 	light_lantern.light_energy = clampf(light_lantern.light_energy, 1, 99)
 	
@@ -102,6 +109,12 @@ func _input(event) -> void:
 func change_lantern_brightness(value: float) -> void:
 	light_lantern.light_energy += value
 
+func _headbob(time) -> Vector3:
+	var pos = Vector3.ZERO
+	pos.y = (sin(time * BOB_FREQ) * BOB_AMP) + 0.5
+	if sin(time * BOB_FREQ) <= -0.99 and !Global.player_sounds.all_sounds["footstep"].playing:
+		Global.player_sounds.randp_play("footstep", 0.2, 0.5)
+	return pos
 
 ## when the ghost touches you this finds ghost's head position
 ## and your camera snaps to its head pos for a "jumpscare"
@@ -114,6 +127,8 @@ func die() -> void:
 	look_pos.y += 1.0
 	head.position.y = 1.0
 	death_animation = true
+	lantern_empowered = false
+	Global.enemy.state = Global.enemy.states.ALERTED
 	head.look_at(look_pos)
 	await get_tree().create_timer(
 		2.0,

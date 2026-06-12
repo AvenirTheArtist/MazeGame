@@ -126,6 +126,8 @@ func move_to_player():
 
 ## TEST TEST TEST changed stun duration to 3s
 func get_stunned() -> void:
+	if Global.player.death_animation:
+		return
 	if stun_immunity > 0: return
 	player_proximity.get_child(0).disabled = true
 	state = states.STUNNED
